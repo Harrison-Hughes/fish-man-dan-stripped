@@ -10,13 +10,12 @@ class OrdersController < ApplicationController
     end
   end
 
-
   def create
     request_objects = JSON.parse(order_params[:request_objects]) # request objects => [{item_id: ~, amount: ~}, ...]
-
+    
     unique_reference = false
-    while unique_reference = false
-      reference = rand(12**length).to_s(12)
+    while unique_reference == false
+      reference = rand(36**6).to_s(36)
       if !Order.find_by(reference: reference)
         unique_reference = true
       end
@@ -51,7 +50,7 @@ class OrdersController < ApplicationController
     invalid_fields["line_one"]="Please enter an address." if address["line_one"]==""
     invalid_fields["town_city"]="Please enter a town/city." if address["town_city"]==""
     invalid_fields["county"]="Please enter a county." if address["county"]==""
-    invalid_fields["contact_number"]="Please enter a phone number so we can call if there are any issues with delivery." if address["contact_number"]==""
+    invalid_fields["contact_number"]="Please enter a phone number so we can call if there are any issues with delivery." if address["contact_number"].length < 10
     return invalid_fields
   end
 end
