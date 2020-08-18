@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :items, only: [:index, :create, :update, :destroy]
+  resources :orders, only: [:index, :create, :update, :destroy]
+  get "/validate_address", to: "orders#validate_address"
 end
