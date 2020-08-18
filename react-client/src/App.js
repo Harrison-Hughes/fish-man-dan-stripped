@@ -4,6 +4,7 @@ import AppHeader from "./app/AppHeader";
 import StepStrip from "./app/StepStrip";
 import AppFooter from "./app/AppFooter";
 import { Switch, Route } from "react-router-dom";
+import Browse from "./app/Browse";
 
 function App() {
   const [basket, setBasket] = useState("");
@@ -19,7 +20,7 @@ function App() {
           <StepStrip currStep={"receipt"} />
         </Route>
         <Route path="/">
-          <StepStrip currStep={"browse"} />
+          <Browse />
         </Route>
       </Switch>
       <AppFooter />
