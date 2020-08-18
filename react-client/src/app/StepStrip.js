@@ -1,31 +1,45 @@
 import React from "react";
 import { Segment, Icon, Step } from "semantic-ui-react";
 
-const StepStrip = ({ step }) => {
+const StepStrip = ({ currStep }) => {
+  const isActive = (step) => {
+    if (step === currStep) {
+      return true;
+    } else return false;
+  };
+
+  const isDisabled = (step) => {
+    if (
+      currStep === "browse" ||
+      (step === "shipping" && currStep === "checkout")
+    ) {
+      return true;
+    } else return false;
+  };
+
   return (
     <div className="step-strip">
       <Segment>
-        <Step.Group>
-          <Step>
-            <Icon name="truck" />
+        <Step.Group size="small">
+          <Step active={isActive("browse")}>
+            <Icon name="shop" />
             <Step.Content>
-              <Step.Title>Shipping</Step.Title>
-              <Step.Description>Choose your shipping options</Step.Description>
+              <Step.Title>Select</Step.Title>
+              {/* <Step.Description>Choose what you'd like</Step.Description> */}
             </Step.Content>
           </Step>
-
-          <Step active>
-            <Icon name="payment" />
+          <Step active={isActive("checkout")} disabled={isDisabled("checkout")}>
+            <Icon name="list" />
             <Step.Content>
-              <Step.Title>Billing</Step.Title>
-              <Step.Description>Enter billing information</Step.Description>
+              <Step.Title>Checkout</Step.Title>
+              {/* <Step.Description>Confirm order</Step.Description> */}
             </Step.Content>
           </Step>
-
-          <Step disabled>
-            <Icon name="info" />
+          <Step active={isActive("receipt")} disabled={isDisabled("receipt")}>
+            <Icon name="file alternate outline" />
             <Step.Content>
-              <Step.Title>Confirm Order</Step.Title>
+              <Step.Title>Receipt</Step.Title>
+              {/* <Step.Description>Order confirmation</Step.Description> */}
             </Step.Content>
           </Step>
         </Step.Group>
