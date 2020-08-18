@@ -1,7 +1,7 @@
 import React from "react";
 import { Segment, Icon, Step } from "semantic-ui-react";
 
-const StepStrip = () => {
+const StepStrip = ({ step }) => {
   return (
     <div className="step-strip">
       <Segment>

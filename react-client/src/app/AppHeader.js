@@ -8,7 +8,7 @@ const AppHeader = () => {
         <Header
           as="h1"
           inverted
-          color="teal"
+          // color="teal"
           style={{
             fontSize: "3em",
             fontWeight: "bold",
@@ -17,6 +17,18 @@ const AppHeader = () => {
           }}
         >
           fish man dan
+        </Header>
+        <Header
+          as="h4"
+          inverted
+          color="teal"
+          style={{
+            fontSize: "1em",
+            fontWeight: "normal",
+            marginBottom: 0,
+          }}
+        >
+          how much fish would a fish man dan if a fish dan could fish man?
         </Header>
       </Segment>
     </div>
