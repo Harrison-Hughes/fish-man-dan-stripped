@@ -8,10 +8,9 @@ const AppHeader = () => {
         <Header
           as="h1"
           inverted
-          color="teal"
           style={{
             fontSize: "3em",
-            fontWeight: "bold",
+            fontWeight: "normal",
             marginBottom: 0,
             // marginTop: "0.5em",
           }}
