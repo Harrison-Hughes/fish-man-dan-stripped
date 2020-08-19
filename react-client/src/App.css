@@ -1,9 +1,20 @@
 .App {
+  height: 100vh;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.app-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
+.items {
+  max-width: 90%;
+  margin: auto;
+  text-align: left;
 }

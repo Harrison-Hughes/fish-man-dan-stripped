@@ -3,8 +3,8 @@ import { Segment, Container, Header } from "semantic-ui-react";
 
 const AppFooter = () => {
   return (
-    <div className="app-footer">
-      <Segment inverted vertical style={{ padding: "5em 0em" }}>
+    <div className="footer">
+      <Segment inverted vertical style={{ padding: "2em 0em" }}>
         <Container>
           <Header inverted as="h3" content="Like this website?" />
           <Header inverted as="h4">

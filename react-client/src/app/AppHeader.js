@@ -4,7 +4,7 @@ import { Segment, Header } from "semantic-ui-react";
 const AppHeader = () => {
   return (
     <div className="header">
-      <Segment attached inverted padded="very">
+      <Segment attached inverted>
         <Header
           as="h1"
           inverted

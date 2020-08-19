@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import AppHeader from "./app/AppHeader";
 import StepStrip from "./app/StepStrip";
@@ -7,22 +7,34 @@ import { Switch, Route } from "react-router-dom";
 import Browse from "./app/Browse";
 
 function App() {
-  const [basket, setBasket] = useState("");
+  const [basket, setBasket] = useState([]);
+
+  useEffect(() => {
+    if (!!localStorage.fishManDanLocalBasket) {
+      setBasket(JSON.parse(localStorage.fishManDanLocalBasket));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.fishManDanLocalBasket = JSON.stringify(basket);
+  }, [basket]);
 
   return (
     <div className="App">
-      <AppHeader />
-      <Switch>
-        <Route path="/checkout">
-          <StepStrip currStep={"checkout"} />
-        </Route>
-        <Route path="/receipt/:receipt_code">
-          <StepStrip currStep={"receipt"} />
-        </Route>
-        <Route path="/">
-          <Browse />
-        </Route>
-      </Switch>
+      <div className="content">
+        <AppHeader />
+        <Switch>
+          <Route path="/checkout">
+            <StepStrip currStep={"checkout"} />
+          </Route>
+          <Route path="/receipt/:receipt_code">
+            <StepStrip currStep={"receipt"} />
+          </Route>
+          <Route path="/">
+            <Browse basket={basket} setBasket={setBasket} />
+          </Route>
+        </Switch>
+      </div>
       <AppFooter />
     </div>
   );
