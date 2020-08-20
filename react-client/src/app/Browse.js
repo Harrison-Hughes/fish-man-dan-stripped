@@ -5,6 +5,7 @@ import Items from "./Items";
 import { Grid, Segment, Button } from "semantic-ui-react";
 import BrowseFilter from "./BrowseFilter";
 import PlaceholderItemCardGrid from "./item-card/PlaceholderItemCardGrid";
+import { withRouter } from "react-router-dom";
 
 const Browse = ({ basket, setBasket }) => {
   const [itemsLoading, setItemsLoading] = useState(true);
@@ -26,20 +27,25 @@ const Browse = ({ basket, setBasket }) => {
       });
   }, []);
 
-  useEffect(() => setFilteredItems(filterItems()), [items, itemFilter]);
+  useEffect(() => setItemFilter(""), []);
 
-  const filterItems = () => {
-    // console.log(items);
-    return items;
-  };
+  useEffect(() => {
+    let filteredItems = items;
+    console.log(filteredItems);
+    setFilteredItems(filteredItems);
+  }, [items, itemFilter]);
 
-  const CheckoutButton = () => {
-    return (
-      <Button primary disabled={basket.length === 0}>
-        Proceed to checkout
-      </Button>
-    );
-  };
+  const CheckoutButton = withRouter(({ history }) => (
+    <Button
+      primary
+      disabled={basket.length === 0}
+      onClick={() => {
+        history.push("/checkout");
+      }}
+    >
+      Proceed to checkout
+    </Button>
+  ));
 
   return (
     <div className="browse">
