@@ -3,6 +3,8 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  background-color: ghostwhite;
+  /* background-image: linear-gradient(to bottom right, #e1f5f5, #a4fcfc); */
 }
 
 .content {
