@@ -86,7 +86,7 @@ const ItemCardInteractive = ({
     }
   };
 
-  const metaContent = () => {
+  const itemPrice = () => {
     if (item.price_by_each) {
       return `£${parseFloat(item.price_per).toFixed(2)} each`;
     } else return `£${parseFloat(item.price_per).toFixed(2)} per. kg`;
@@ -114,7 +114,7 @@ const ItemCardInteractive = ({
       <Card.Content onClick={() => onCardClick()}>
         <Card.Header>{item.name}</Card.Header>
         <Card.Meta>
-          <span className="meta">Price: {metaContent()}</span>
+          <span className="meta">Price: {itemPrice()}</span>
         </Card.Meta>
         <Card.Meta>
           <span className="meta">Size: {item.size}</span>
