@@ -20,3 +20,33 @@
   margin: auto;
   text-align: left;
 }
+
+.basket-list {
+  max-width: 50em;
+  margin: auto;
+  text-align: left;
+}
+
+.basket-list-grid-column {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.basket-list-grid-column-2 {
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+  display: flex;
+}
+
+.basket-list-item-quantity {
+  margin-left: auto !important;
+  float: right;
+}
+
+.basket-list-header {
+  margin-bottom: 0 !important;
+}
+
+.basket-list-list {
+  margin-top: 0.5em !important;
+}

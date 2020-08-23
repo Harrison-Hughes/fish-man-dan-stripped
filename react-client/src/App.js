@@ -5,6 +5,7 @@ import StepStrip from "./app/StepStrip";
 import AppFooter from "./app/AppFooter";
 import { Switch, Route } from "react-router-dom";
 import Browse from "./app/Browse";
+import Checkout from "./app/Checkout";
 
 function App() {
   const [basket, setBasket] = useState([]);
@@ -25,7 +26,7 @@ function App() {
         <AppHeader />
         <Switch>
           <Route path="/checkout">
-            <StepStrip currStep={"checkout"} />
+            <Checkout basket={basket} />
           </Route>
           <Route path="/receipt/:receipt_code">
             <StepStrip currStep={"receipt"} />

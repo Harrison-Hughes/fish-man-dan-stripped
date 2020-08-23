@@ -1,30 +1,36 @@
 import React from "react";
-import { Grid, Placeholder, Segment } from "semantic-ui-react";
+import { Card, Placeholder } from "semantic-ui-react";
 
 const PlaceholderItemCardGrid = () => {
-  const Row = () => {
-    let arr = [...Array(6).keys()];
+  const placeholderCards = () => {
+    let arr = [...Array(12).keys()];
     return arr.map((i) => {
       return (
-        <Grid.Column key={i}>
-          <Segment raised>
+        <Card key={i}>
+          <Card.Content>
             <Placeholder>
-              <Placeholder.Header image>
+              <Placeholder.Header>
                 <Placeholder.Line />
-                <Placeholder.Line />
+                <Placeholder.Line length="short" />
               </Placeholder.Header>
               <Placeholder.Paragraph>
                 <Placeholder.Line length="medium" />
                 <Placeholder.Line length="short" />
+                <Placeholder.Line length="long" />
+                <Placeholder.Line length="medium" />
               </Placeholder.Paragraph>
             </Placeholder>
-          </Segment>
-        </Grid.Column>
+          </Card.Content>
+        </Card>
       );
     });
   };
 
-  return <div className="items">{Row()}</div>;
+  return (
+    <div className="items">
+      <Card.Group centered>{placeholderCards()}</Card.Group>
+    </div>
+  );
 };
 
 export default PlaceholderItemCardGrid;

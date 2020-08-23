@@ -53,7 +53,7 @@ const Browse = ({ basket, setBasket }) => {
         <StepStrip currStep={"browse"} />
       </Segment>
       <Segment vertical>
-        <Grid columns={3} divided>
+        <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column>
               <BrowseFilter />
