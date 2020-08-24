@@ -5,9 +5,11 @@ import CheckoutBreadcrumb from "./checkout/CheckoutBreadcrumb";
 import BasketList from "./checkout/BasketList";
 import { withRouter } from "react-router-dom";
 import OrderDetails from "./checkout/OrderDetails";
+import OrderConfirm from "./checkout/OrderConfirm";
 
 const Checkout = ({ basket }) => {
   const [stage, setStage] = useState("basket");
+  const [orderDetails, setOrderDetails] = useState({});
 
   const ContinueButton = () => {
     if (stage === "basket") {
@@ -35,9 +37,20 @@ const Checkout = ({ basket }) => {
     </Button>
   ));
 
+  const BackButton = () => {
+    if (stage === "basket") {
+      return <BackToBrowseButton />;
+    } else if (stage === "delivery") {
+      return <Button onClick={() => setStage("basket")}>Back to basket</Button>;
+    }
+  };
+
   const renderStage = () => {
-    if (stage === "basket") return <BasketList basket={basket} />;
-    else if (stage === "delivery") return <OrderDetails />;
+    if (stage === "basket")
+      return <BasketList setStage={setStage} basket={basket} />;
+    else if (stage === "delivery") {
+      return <OrderDetails setOrderDetails={setOrderDetails} />;
+    } else return <OrderConfirm orderDetails={orderDetails} />;
   };
 
   return (
@@ -48,19 +61,20 @@ const Checkout = ({ basket }) => {
       <Segment vertical>
         <CheckoutBreadcrumb stage={stage} />
       </Segment>
-      <Segment vertical>{renderStage()}</Segment>
+      {renderStage()}
+      {/* <Segment vertical>{renderStage()}</Segment>
       <Segment vertical>
         <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column>
-              <BackToBrowseButton />
+              <BackButton />
             </Grid.Column>
             <Grid.Column>
               <ContinueButton />
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </Segment>
+      </Segment> */}
     </div>
   );
 };
