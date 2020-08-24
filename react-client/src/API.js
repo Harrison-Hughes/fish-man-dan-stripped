@@ -14,10 +14,11 @@ const getItems = () =>
     headers: HEADERS,
   }).then(jsonify);
 
-const validateAddress = () =>
+const validateAddress = (address) =>
   fetch(`${API_ROOT}/validate_address`, {
-    method: "GET",
+    method: "POST",
     headers: HEADERS,
+    body: JSON.stringify({ order: address }),
   }).then(jsonify);
 
 export default {
