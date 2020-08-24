@@ -50,3 +50,9 @@
 .basket-list-list {
   margin-top: 0.5em !important;
 }
+
+.order-details {
+  max-width: 50em;
+  margin: auto;
+  text-align: left;
+}

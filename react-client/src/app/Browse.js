@@ -31,7 +31,6 @@ const Browse = ({ basket, setBasket }) => {
 
   useEffect(() => {
     let filteredItems = items;
-    console.log(filteredItems);
     setFilteredItems(filteredItems);
   }, [items, itemFilter]);
 
