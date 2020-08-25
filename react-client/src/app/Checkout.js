@@ -8,16 +8,31 @@ import OrderConfirm from "./checkout/OrderConfirm";
 
 const Checkout = ({ basket }) => {
   const [stage, setStage] = useState("basket");
-  const [orderDetails, setOrderDetails] = useState({});
+  const [address, setAddress] = useState({
+    recipient_name: "",
+    line_one: "",
+    line_two: "",
+    town_city: "",
+    county: "",
+    postcode: "",
+    contact_number: "",
+  });
 
   const renderStage = () => {
     if (stage === "basket")
       return <BasketList setStage={setStage} basket={basket} />;
     else if (stage === "delivery") {
       return (
-        <OrderDetails setStage={setStage} setOrderDetails={setOrderDetails} />
+        <OrderDetails
+          setStage={setStage}
+          address={address}
+          setAddress={setAddress}
+        />
       );
-    } else return <OrderConfirm orderDetails={orderDetails} />;
+    } else
+      return (
+        <OrderConfirm setStage={setStage} address={address} basket={basket} />
+      );
   };
 
   return (

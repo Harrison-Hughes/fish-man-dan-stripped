@@ -38,27 +38,29 @@ const ItemNotInBasketForm = ({ basket, setBasket, item }) => {
 
   const amountField = () => {
     return (
-      <Button.Group>
-        <Button
-          type="button"
-          icon
-          onClick={handleIntAmountDecrement}
-          disabled={formData["amount"] === min}
-        >
-          <Icon name="minus" />
-        </Button>
-        <Button type="button" basic color="black">
-          {formData["amount"]}
-        </Button>
-        <Button
-          type="button"
-          icon
-          disabled={formData["amount"] === max}
-          onClick={handleIntAmountIncrement}
-        >
-          <Icon name="plus" />
-        </Button>
-      </Button.Group>
+      <div className="button-group-with-right-margin">
+        <Button.Group>
+          <Button
+            type="button"
+            icon
+            onClick={handleIntAmountDecrement}
+            disabled={formData["amount"] === min}
+          >
+            <Icon name="minus" />
+          </Button>
+          <Button type="button" basic color="black">
+            {formData["amount"]}
+          </Button>
+          <Button
+            type="button"
+            icon
+            disabled={formData["amount"] === max}
+            onClick={handleIntAmountIncrement}
+          >
+            <Icon name="plus" />
+          </Button>
+        </Button.Group>
+      </div>
     );
   };
 
