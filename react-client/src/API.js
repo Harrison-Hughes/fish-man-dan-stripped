@@ -18,7 +18,7 @@ const validateAddress = (address) =>
   fetch(`${API_ROOT}/validate_address`, {
     method: "POST",
     headers: HEADERS,
-    body: JSON.stringify({ order: address }),
+    body: JSON.stringify(address),
   }).then(jsonify);
 
 export default {

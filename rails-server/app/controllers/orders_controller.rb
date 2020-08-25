@@ -31,7 +31,6 @@ class OrdersController < ApplicationController
         render json: { error: "could not make requests" }
       end
     else 
-      render json: { error: "could not place order" }
     end
   end
 

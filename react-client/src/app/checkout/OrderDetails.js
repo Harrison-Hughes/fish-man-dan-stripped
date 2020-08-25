@@ -91,9 +91,9 @@ const OrderDetails = ({ setOrderDetails, setStage }) => {
 
   const handleSubmit = () => {
     setFormSubmitting(true);
-    let address = { address: `${JSON.stringify(formData)}` };
-    console.log({ address });
-    API.validateAddress(address).then((resp) => {
+    // let address = { address: `${JSON.stringify(formData)}` };
+    // console.log({ address });
+    API.validateAddress({ address: formData }).then((resp) => {
       if (resp.error === "invalid form fields") {
         console.log("invalid form fields detected");
         setFormSubmitting(false);
