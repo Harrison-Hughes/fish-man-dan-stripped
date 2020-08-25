@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
-
 import {
   Card,
   Grid,
   Placeholder,
-  Segment,
   Header,
+  Segment,
   List,
-  Button,
 } from "semantic-ui-react";
 import API from "../../API";
 
-const BasketList = ({ basket, setStage }) => {
+const BasketCard = ({ basket }) => {
   const [itemsLoading, setItemsLoading] = useState(true);
   const [itemsInBasket, setItemsInBasket] = useState([]);
 
@@ -34,6 +31,11 @@ const BasketList = ({ basket, setStage }) => {
       });
   }, [basket]);
 
+  const itemQuantity = (item) => {
+    let currBasketDetails = basket.find((i) => i.item_id === item.id);
+    return currBasketDetails.amount;
+  };
+
   const renderBasketPlaceholer = () => {
     return (
       <Card fluid>
@@ -54,33 +56,18 @@ const BasketList = ({ basket, setStage }) => {
     );
   };
 
-  const itemPrice = (item) => {
-    if (item.price_by_each) {
-      return `£${parseFloat(item.price_per).toFixed(2)} each`;
-    } else return `£${parseFloat(item.price_per).toFixed(2)} per. kg`;
-  };
-
-  const itemQuantity = (item) => {
-    let currBasketDetails = basket.find((i) => i.item_id === item.id);
-    return currBasketDetails.amount;
-  };
-
   const renderBasket = () => {
     return itemsInBasket.map((item) => {
       return (
         <Grid.Row key={item.id} columns={2}>
-          <Grid.Column className="basket-list-grid-column">
-            <Header className="basket-list-header" as="h4">
+          <Grid.Column className="basket-card-grid-column">
+            <Header className="basket-card-header" as="h4">
               {item.name}
               {item.is_frozen ? " (frozen)" : null}
             </Header>
-            <List className="basket-list-list">
-              <List.Item>Price: {itemPrice(item)}</List.Item>
-              <List.Item>Size: {item.size}</List.Item>
-            </List>
           </Grid.Column>
-          <Grid.Column className="basket-list-grid-column-2">
-            <div className="basket-list-item-quantity">
+          <Grid.Column className="basket-card-grid-column-2">
+            <div className="basket-card-item-quantity">
               <Header as="h4">
                 {item.custom_amount ? null : `Qty:`} {itemQuantity(item)}
               </Header>
@@ -91,34 +78,15 @@ const BasketList = ({ basket, setStage }) => {
     });
   };
 
-  const BackToBrowseButton = withRouter(({ history }) => (
-    <Button
-      onClick={() => {
-        history.push("/");
-      }}
-    >
-      Back to browse
-    </Button>
-  ));
-
   return (
-    <div className="basket-list">
-      <Segment vertical>
-        <Segment>
-          <Grid columns={2} divided="vertically">
-            {itemsLoading ? renderBasketPlaceholer() : renderBasket()}
-          </Grid>
-        </Segment>
-      </Segment>
-      <Segment vertical>
-        <BackToBrowseButton />
-
-        <Button floated="right" onClick={() => setStage("delivery")} positive>
-          Proceed with order
-        </Button>
+    <div className="basket-card">
+      <Segment>
+        <Grid columns={2} divided="vertically">
+          {itemsLoading ? renderBasketPlaceholer() : renderBasket()}
+        </Grid>
       </Segment>
     </div>
   );
 };
 
-export default BasketList;
+export default BasketCard;

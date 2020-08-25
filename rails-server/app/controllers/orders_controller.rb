@@ -4,9 +4,11 @@ class OrdersController < ApplicationController
   end
 
   def validate_address
-    if invalid_fields.length > 0
-      render json: { error: "invalid form fields", invalid_fields: invalid_fields }
-    else render json: {message: "address valid"}
+    if invalid_address_fields.length > 0
+      render json: { error: "invalid form fields", invalid_fields: invalid_address_fields }
+    else 
+      @valid_address = address_params
+      render json: {message: "address valid"}
     end
   end
 
@@ -37,15 +39,23 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:request_objects, :status, :address)
+    params.require(:order).permit(:request_objects, :status, :address, :email)
   end
 
   def address_params
-    params.require(:address).permit(:id, :recipient_name, :postcode, :line_one, :line_two, :town_city, :county, :contact_number)
+    params.require(:address).permit(:recipient_name, :postcode, :line_one, :line_two, :town_city, :county, :contact_number)
   end
 
-  def invalid_fields
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  def is_email_valid(email)
+    email =~VALID_EMAIL_REGEX
+  end
+
+  def invalid_address_fields
     invalid_fields = {}
+
+    invalid_fields["email"]="Please enter a valid e-mail." if is_email_valid(address_params[:email])
+    invalid_fields["recipient_name"]="Please enter the name of the recipient." if address_params[:recipient_name]==""
     invalid_fields["recipient_name"]="Please enter the name of the recipient." if address_params[:recipient_name]==""
     invalid_fields["postcode"]="Please enter a valid postcode." if address_params[:postcode].length < 5 ||address_params[:postcode].length > 8
     invalid_fields["line_one"]="Please enter an address." if address_params[:line_one]==""
