@@ -1,26 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import API from "../../API";
 import { Button, Form, Header, Segment } from "semantic-ui-react";
 
 const OrderDetails = ({ address, setAddress, setStage }) => {
   const [invalidAddressFormFields, setInvalidAddressFormFields] = useState({});
   const [formSubmitting, setFormSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    recipient_name: "",
-    line_one: "",
-    line_two: "",
-    town_city: "",
-    county: "",
-    postcode: "",
-    contact_number: "",
-  });
-
-  useEffect(() => {
-    if (address !== {}) setFormData(address);
-  }, []);
 
   function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setAddress({ ...address, [e.target.name]: e.target.value });
   }
 
   const errorObj = (fieldName) => {
@@ -42,14 +29,14 @@ const OrderDetails = ({ address, setAddress, setStage }) => {
             name="recipient_name"
             onChange={handleChange}
             error={errorObj("recipient_name")}
-            value={formData["recipient_name"]}
+            value={address["recipient_name"]}
           />
           <Form.Input
             label="Contact number"
             name="contact_number"
             onChange={handleChange}
             error={errorObj("contact_number")}
-            value={formData["contact_number"]}
+            value={address["contact_number"]}
           />
         </Form.Group>
         <Form.Input
@@ -57,14 +44,14 @@ const OrderDetails = ({ address, setAddress, setStage }) => {
           name="line_one"
           onChange={handleChange}
           error={errorObj("line_one")}
-          value={formData["line_one"]}
+          value={address["line_one"]}
         />
         <Form.Input
           label="Address line 2 (if necessary)"
           name="line_two"
           onChange={handleChange}
           error={errorObj("line_two")}
-          value={formData["line_two"]}
+          value={address["line_two"]}
         />
         <Form.Group widths="equal">
           <Form.Input
@@ -72,21 +59,21 @@ const OrderDetails = ({ address, setAddress, setStage }) => {
             name="town_city"
             onChange={handleChange}
             error={errorObj("town_city")}
-            value={formData["town_city"]}
+            value={address["town_city"]}
           />
           <Form.Input
             label="County"
             name="county"
             onChange={handleChange}
             error={errorObj("county")}
-            value={formData["county"]}
+            value={address["county"]}
           />
           <Form.Input
             label="Postcode"
             name="postcode"
             onChange={handleChange}
             error={errorObj("postcode")}
-            value={formData["postcode"]}
+            value={address["postcode"]}
           />
         </Form.Group>
       </Form>
@@ -95,7 +82,7 @@ const OrderDetails = ({ address, setAddress, setStage }) => {
 
   const handleSubmit = () => {
     setFormSubmitting(true);
-    API.validateAddress({ address: formData })
+    API.validateAddress({ address: address })
       .then((resp) => {
         if (resp.error === "invalid form fields") {
           console.log("invalid form fields detected");
@@ -103,7 +90,6 @@ const OrderDetails = ({ address, setAddress, setStage }) => {
           setInvalidAddressFormFields(resp.invalid_fields);
         } else {
           setFormSubmitting(false);
-          setAddress(formData);
           setStage("confirm");
         }
       })

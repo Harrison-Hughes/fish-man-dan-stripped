@@ -22,8 +22,9 @@ class OrdersController < ApplicationController
         unique_reference = true
       end
     end
-
-    order = Order.new(status: 'pending confirmation',  address: order_params[:address], email: order_params[:email], reference: reference)
+    p("ORDER PARAMS ADDRESS", order_params[:address])
+    address = Address.create(order_params[:address])
+    order = Order.new(status: 'pending confirmation',  address: address, email: order_params[:email], reference: reference)
 
     if order.save 
       if !Request.make_requests(order, request_objects).any? { |r| r.nil? }
@@ -39,29 +40,12 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:request_objects, :status, :address, :email)
+    params.require(:order).permit(:request_objects, :status, :email, address: {})
   end
-
-  # def address_params
-  #   params.require(:address).permit(:recipient_name, :postcode, :line_one, :line_two, :town_city, :county, :contact_number)
-  # end
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   def is_email_valid(email)
     email =~VALID_EMAIL_REGEX
   end
 
-  # def invalid_address_fields
-  #   invalid_fields = {}
-
-  #   invalid_fields["email"]="Please enter a valid e-mail." if is_email_valid(address_params[:email])
-  #   invalid_fields["recipient_name"]="Please enter the name of the recipient." if address_params[:recipient_name]==""
-  #   invalid_fields["recipient_name"]="Please enter the name of the recipient." if address_params[:recipient_name]==""
-  #   invalid_fields["postcode"]="Please enter a valid postcode." if address_params[:postcode].length < 5 ||address_params[:postcode].length > 8
-  #   invalid_fields["line_one"]="Please enter an address." if address_params[:line_one]==""
-  #   invalid_fields["town_city"]="Please enter a town/city." if address_params[:town_city]==""
-  #   invalid_fields["county"]="Please enter a county." if address_params[:county]==""
-  #   invalid_fields["contact_number"]="Please enter a phone number so we can call if there are any issues with delivery." if address_params[:contact_number]==""
-  #   return invalid_fields
-  # end
 end

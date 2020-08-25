@@ -8,7 +8,15 @@ import OrderConfirm from "./checkout/OrderConfirm";
 
 const Checkout = ({ basket }) => {
   const [stage, setStage] = useState("basket");
-  const [address, setAddress] = useState({});
+  const [address, setAddress] = useState({
+    recipient_name: "",
+    line_one: "",
+    line_two: "",
+    town_city: "",
+    county: "",
+    postcode: "",
+    contact_number: "",
+  });
 
   const renderStage = () => {
     if (stage === "basket")
