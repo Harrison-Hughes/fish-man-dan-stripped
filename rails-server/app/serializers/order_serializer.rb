@@ -1,4 +1,4 @@
 class OrderSerializer < ActiveModel::Serializer
-  attributes :id, :status, :address, :requests
+  attributes :id, :status, :address, :requests, :reference
 
 end

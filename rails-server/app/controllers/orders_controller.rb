@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
   # end
 
   def create
-    request_objects = JSON.parse(order_params[:request_objects]) # request objects => [{item_id: ~, amount: ~}, ...]
+    request_objects = order_params[:request_objects] # request objects => [{item_id: ~, amount: ~}, ...]
     
     unique_reference = false
     while unique_reference == false
@@ -22,7 +22,7 @@ class OrdersController < ApplicationController
         unique_reference = true
       end
     end
-    p("ORDER PARAMS ADDRESS", order_params[:address])
+
     address = Address.create(order_params[:address])
     order = Order.new(status: 'pending confirmation',  address: address, email: order_params[:email], reference: reference)
 
@@ -40,7 +40,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:request_objects, :status, :email, address: {})
+    params.require(:order).permit(:status, :email, address: {}, request_objects: [:item_id, :amount])
   end
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

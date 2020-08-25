@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form, Header, Segment } from "semantic-ui-react";
+import { Button, Form, Header, Segment, Input } from "semantic-ui-react";
 import AddressCard from "./AddresssCard";
 import BasketCard from "./BasketCard";
+import API from "../../API";
 
 const OrderConfirm = ({ setStage, address, basket }) => {
   const [formSubmitting, setFormSubmitting] = useState(false);
@@ -11,6 +12,31 @@ const OrderConfirm = ({ setStage, address, basket }) => {
   function handleChange(e) {
     setEmail(e.target.value);
   }
+
+  const submitOrder = () => {
+    let order = {
+      order: {
+        request_objects: basket,
+        address: address,
+        email: email,
+      },
+    };
+    console.log("order", order);
+    API.placeOrder(order)
+      .then((resp) => {
+        if (resp.error === "invalid email field") {
+          console.log("invalid email field detected");
+          setFormSubmitting(false);
+          setEmailError(true);
+        } else {
+          setFormSubmitting(false);
+          console.log("success");
+        }
+      })
+      .catch(() => {
+        console.log("Server is currently offline. Please try later");
+      });
+  };
 
   return (
     <div className="order-confirm">
@@ -28,8 +54,22 @@ const OrderConfirm = ({ setStage, address, basket }) => {
       <Segment vertical>
         <Header as="h4">Final required information:</Header>
         <Form>
-          <Form.Input
-            label="E-mail address:"
+          <Form.Field inline>
+            <label>E-mail address:</label>
+            <Input
+              onChange={handleChange}
+              error={
+                emailError
+                  ? {
+                      content: `Please enter a valid e-mail address!`,
+                      pointing: "above",
+                    }
+                  : null
+              }
+              value={email}
+            />
+          </Form.Field>
+          {/* <Form.Input
             name="email"
             onChange={handleChange}
             error={
@@ -41,7 +81,7 @@ const OrderConfirm = ({ setStage, address, basket }) => {
                 : null
             }
             value={email}
-          />
+          /> */}
         </Form>
       </Segment>
       <Segment vertical>
@@ -49,7 +89,7 @@ const OrderConfirm = ({ setStage, address, basket }) => {
         <Button onClick={() => setStage("delivery")}>Back to delivery</Button>
         <Button
           floated="right"
-          onClick={() => console.log("woo")}
+          onClick={() => submitOrder()}
           positive
           loading={formSubmitting}
         >
