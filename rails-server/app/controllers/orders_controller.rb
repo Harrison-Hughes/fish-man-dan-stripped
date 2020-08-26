@@ -13,27 +13,31 @@ class OrdersController < ApplicationController
   # end
 
   def create
-    request_objects = order_params[:request_objects] # request objects => [{item_id: ~, amount: ~}, ...]
-    
-    unique_reference = false
-    while unique_reference == false
-      reference = rand(36**6).to_s(36)
-      if !Order.find_by(reference: reference)
-        unique_reference = true
+    if !is_email_valid(order_params[:email])
+      render json: {error: 'invalid email field'}
+    else
+      request_objects = order_params[:request_objects] # request objects => [{item_id: ~, amount: ~}, ...]
+      
+      unique_reference = false
+      while unique_reference == false
+        reference = rand(36**8).to_s(36)
+        if !Order.find_by(reference: reference) && reference.length == 8
+          unique_reference = true
+        end
       end
-    end
-
-    address = Address.create(order_params[:address])
-    order = Order.new(status: 'pending confirmation',  address: address, email: order_params[:email], reference: reference)
-
-    if order.save 
-      if !Request.make_requests(order, request_objects).any? { |r| r.nil? }
-        render json: order
+      
+      address = Address.create(order_params[:address])
+      order = Order.new(status: 'pending confirmation',  address: address, email: order_params[:email], reference: reference)
+      
+      if order.save 
+        if !Request.make_requests(order, request_objects).any? { |r| r.nil? }
+          render json: order
+        else 
+          order.destroy
+          render json: { error: "could not make requests" }
+        end
       else 
-        order.destroy
-        render json: { error: "could not make requests" }
       end
-    else 
     end
   end
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Header, Segment, Input } from "semantic-ui-react";
+import { Button, Form, Header, Segment, Message } from "semantic-ui-react";
 import AddressCard from "./AddresssCard";
 import BasketCard from "./BasketCard";
 import API from "../../API";
@@ -21,7 +21,7 @@ const OrderConfirm = ({ setStage, address, basket }) => {
         email: email,
       },
     };
-    console.log("order", order);
+
     API.placeOrder(order)
       .then((resp) => {
         if (resp.error === "invalid email field") {
@@ -30,7 +30,7 @@ const OrderConfirm = ({ setStage, address, basket }) => {
           setEmailError(true);
         } else {
           setFormSubmitting(false);
-          console.log("success");
+          console.log(resp);
         }
       })
       .catch(() => {
@@ -52,50 +52,40 @@ const OrderConfirm = ({ setStage, address, basket }) => {
         <AddressCard address={address} />
       </Segment>
       <Segment vertical>
+        {emailError ? (
+          <Message warning>
+            <Message.Header>
+              Please enter a valid e-mail address!
+            </Message.Header>
+            <p>We need it so we can send you your order receipt!</p>
+          </Message>
+        ) : null}
         <Header as="h4">Final required information:</Header>
         <Form>
           <Form.Field inline>
-            <label>E-mail address:</label>
-            <Input
+            <Form.Input
+              name="email"
+              label="E-mail address:"
               onChange={handleChange}
-              error={
-                emailError
-                  ? {
-                      content: `Please enter a valid e-mail address!`,
-                      pointing: "above",
-                    }
-                  : null
-              }
               value={email}
             />
           </Form.Field>
-          {/* <Form.Input
-            name="email"
-            onChange={handleChange}
-            error={
-              emailError
-                ? {
-                    content: `Please enter a valid e-mail address!`,
-                    pointing: "above",
-                  }
-                : null
-            }
-            value={email}
-          /> */}
         </Form>
       </Segment>
-      <Segment vertical>
-        <Button onClick={() => setStage("basket")}>Back to basket</Button>
-        <Button onClick={() => setStage("delivery")}>Back to delivery</Button>
-        <Button
-          floated="right"
-          onClick={() => submitOrder()}
-          positive
-          loading={formSubmitting}
-        >
-          Place order!
-        </Button>
-      </Segment>
+      <div className="bottom-segment">
+        <Segment vertical>
+          <Button onClick={() => setStage("basket")}>Back to basket</Button>
+          <Button onClick={() => setStage("delivery")}>Back to delivery</Button>
+          <Button
+            floated="right"
+            onClick={() => submitOrder()}
+            positive
+            loading={formSubmitting}
+          >
+            Place order!
+          </Button>
+        </Segment>
+      </div>
     </div>
   );
 };

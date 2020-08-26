@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import API from "../../API";
-import { Button, Form, Header, Segment } from "semantic-ui-react";
+import { Button, Form, Header, Segment, Message } from "semantic-ui-react";
 
 const OrderDetails = ({ address, setAddress, setStage }) => {
   const [invalidAddressFormFields, setInvalidAddressFormFields] = useState({});
@@ -102,19 +102,21 @@ const OrderDetails = ({ address, setAddress, setStage }) => {
     <div className="order-details">
       <Segment vertical>
         <Header as="h2">Please enter delivery details below:</Header>
-        {orderForm()}
       </Segment>
-      <Segment vertical>
-        <Button onClick={() => setStage("basket")}>Back to basket</Button>
-        <Button
-          floated="right"
-          onClick={() => handleSubmit()}
-          positive
-          loading={formSubmitting}
-        >
-          Submit delivery information
-        </Button>
-      </Segment>
+      <Segment vertical>{orderForm()}</Segment>
+      <div className="bottom-segment">
+        <Segment vertical>
+          <Button onClick={() => setStage("basket")}>Back to basket</Button>
+          <Button
+            floated="right"
+            onClick={() => handleSubmit()}
+            positive
+            loading={formSubmitting}
+          >
+            Submit delivery information
+          </Button>
+        </Segment>
+      </div>
     </div>
   );
 };
