@@ -34,9 +34,17 @@ const getOrder = (order_reference) =>
     header: HEADERS,
   }).then(jsonify);
 
+const updateOrderStatus = (order_reference, status) =>
+  fetch(`${API_ROOT}/order/update_order_status/${order_reference}`, {
+    method: "PATCH",
+    headers: HEADERS,
+    body: JSON.stringify({ order: { status: status } }),
+  }).then(jsonify);
+
 export default {
   getItems,
   validateAddress,
   placeOrder,
   getOrder,
+  updateOrderStatus,
 };
