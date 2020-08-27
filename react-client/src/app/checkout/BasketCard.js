@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  Grid,
-  Placeholder,
-  Header,
-  Segment,
-  List,
-} from "semantic-ui-react";
+import { Card, Grid, Placeholder, Header, Segment } from "semantic-ui-react";
 import API from "../../API";
 
 const BasketCard = ({ basket }) => {

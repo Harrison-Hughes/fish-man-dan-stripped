@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import API from "../../API";
-import { Button, Form, Header, Segment, Message } from "semantic-ui-react";
+import { Button, Form, Header, Segment } from "semantic-ui-react";
 
 const OrderDetails = ({ address, setAddress, setStage }) => {
   const [invalidAddressFormFields, setInvalidAddressFormFields] = useState({});
