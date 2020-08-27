@@ -9,7 +9,6 @@ import {
   Header,
   List,
   Button,
-  Message,
 } from "semantic-ui-react";
 
 const BasketList = ({ basket, setStage }) => {
@@ -107,9 +106,6 @@ const BasketList = ({ basket, setStage }) => {
         <Segment vertical>
           <Header as="h2">Your current basket:</Header>
         </Segment>
-        {/* <Message info>
-          <Message.Header>Current basket:</Message.Header>
-        </Message> */}
         <Segment>
           <Grid columns={2} divided="vertically">
             {itemsLoading ? renderBasketPlaceholer() : renderBasket()}
@@ -118,7 +114,6 @@ const BasketList = ({ basket, setStage }) => {
       </Segment>
       <Segment vertical>
         <BackToBrowseButton />
-
         <Button floated="right" onClick={() => setStage("delivery")} positive>
           Proceed with order
         </Button>

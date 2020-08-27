@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import AppHeader from "./app/AppHeader";
-import StepStrip from "./app/StepStrip";
 import AppFooter from "./app/AppFooter";
 import { Switch, Route } from "react-router-dom";
 import Browse from "./app/Browse";
 import Checkout from "./app/Checkout";
+import Receipt from "./app/Receipt";
 
 function App() {
   const [basket, setBasket] = useState([]);
@@ -29,7 +29,7 @@ function App() {
             <Checkout basket={basket} />
           </Route>
           <Route path="/receipt/:receipt_code">
-            <StepStrip currStep={"receipt"} />
+            <Receipt />
           </Route>
           <Route path="/">
             <Browse basket={basket} setBasket={setBasket} />

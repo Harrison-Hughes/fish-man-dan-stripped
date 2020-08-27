@@ -28,8 +28,15 @@ const placeOrder = (order) =>
     body: JSON.stringify(order),
   }).then(jsonify);
 
+const getOrder = (order_reference) =>
+  fetch(`${API_ROOT}/order/${order_reference}`, {
+    method: "GET",
+    header: HEADERS,
+  }).then(jsonify);
+
 export default {
   getItems,
   validateAddress,
   placeOrder,
+  getOrder,
 };

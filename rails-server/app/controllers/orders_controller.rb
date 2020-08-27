@@ -3,14 +3,14 @@ class OrdersController < ApplicationController
     render json: Order.all
   end
 
-  # def validate_address
-  #   if invalid_address_fields.length > 0
-  #     render json: { error: "invalid form fields", invalid_fields: invalid_address_fields }
-  #   else 
-  #     @valid_address = address_params
-  #     render json: {message: "address valid"}
-  #   end
-  # end
+  def show
+    order = Order.find_by(reference: params[:order_reference])
+    if !order
+      render json: {error: 'order not found'}
+    else 
+      render json: order
+    end
+  end
 
   def create
     if !is_email_valid(order_params[:email])
@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
       unique_reference = false
       while unique_reference == false
         reference = rand(36**8).to_s(36)
-        if !Order.find_by(reference: reference) && reference.length == 8
+        if !Order.find_by(reference: reference) && reference.length == 8 && reference.count("0-9") > 0
           unique_reference = true
         end
       end

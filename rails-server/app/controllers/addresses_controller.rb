@@ -4,7 +4,6 @@ class AddressesController < ApplicationController
     if invalid_address_fields.length > 0
       render json: { error: "invalid form fields", invalid_fields: invalid_address_fields }
     else 
-      # @valid_address = address_params
       render json: {message: "address valid"}
     end
   end
