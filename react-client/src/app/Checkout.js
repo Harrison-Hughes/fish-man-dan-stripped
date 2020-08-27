@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import StepStrip from "./StepStrip";
 import { Segment } from "semantic-ui-react";
 import CheckoutBreadcrumb from "./checkout/CheckoutBreadcrumb";
+import Basket from "./checkout/Basket";
 import BasketList from "./checkout/BasketList";
 import OrderDetails from "./checkout/OrderDetails";
 import OrderConfirm from "./checkout/OrderConfirm";
@@ -20,7 +21,7 @@ const Checkout = ({ basket }) => {
 
   const renderStage = () => {
     if (stage === "basket")
-      return <BasketList setStage={setStage} basket={basket} />;
+      return <Basket setStage={setStage} basket={basket} />;
     else if (stage === "delivery") {
       return (
         <OrderDetails
