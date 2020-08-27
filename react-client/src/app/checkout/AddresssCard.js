@@ -7,9 +7,9 @@ const AddressCard = ({ address }) => {
       <Card.Content>
         <Feed>
           <Feed.Event>
-            <Feed.Content>
-              <Feed.Summary>{address.recipient_name}</Feed.Summary>
-            </Feed.Content>
+            {/* <Feed.Content> */}
+            <Feed.Summary>{address.recipient_name}</Feed.Summary>
+            {/* </Feed.Content> */}
           </Feed.Event>
           <Feed.Event>{address.line_one}</Feed.Event>
           {!!address.line_two ? (
@@ -23,6 +23,26 @@ const AddressCard = ({ address }) => {
         </Feed>
       </Card.Content>
     </Card>
+    // <Card>
+    //   <Card.Content>
+    //     <Feed>
+    //       <Feed.Event>
+    //         <Feed.Content>
+    //           <Feed.Summary>{address.recipient_name}</Feed.Summary>
+    //           <Feed.Extra>{address.line_one}</Feed.Extra>
+    //           {!!address.line_two ? (
+    //             <Feed.Extra>{address.line_two}</Feed.Extra>
+    //           ) : null}
+    //           <Feed.Extra>
+    //             {address.town_city}, {address.county}
+    //           </Feed.Extra>
+    //           <Feed.Extra>{address.postcode}</Feed.Extra>
+    //           <Feed.Extra>Contact number: {address.contact_number}</Feed.Extra>
+    //         </Feed.Content>
+    //       </Feed.Event>
+    //     </Feed>
+    //   </Card.Content>
+    // </Card>
   );
 };
 

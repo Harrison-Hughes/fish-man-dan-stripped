@@ -31,6 +31,12 @@
   text-align: left;
 }
 
+.basket {
+  max-width: 50em;
+  margin: auto;
+  text-align: left;
+}
+
 .basket-list-grid-column {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -108,3 +114,7 @@
 .padded-div {
   padding: 0 0.5em 0.5em 1em;
 }
+/* 
+.feed-content {
+  background-color: white;
+} */

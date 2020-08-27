@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
 import API from "../../API";
 import {
   Card,
@@ -8,10 +7,9 @@ import {
   Segment,
   Header,
   List,
-  Button,
 } from "semantic-ui-react";
 
-const BasketList = ({ basket, setStage }) => {
+const BasketList = ({ basket }) => {
   const [itemsLoading, setItemsLoading] = useState(true);
   const [itemsInBasket, setItemsInBasket] = useState([]);
 
@@ -46,7 +44,14 @@ const BasketList = ({ basket, setStage }) => {
                 </Placeholder.Header>
               </Placeholder>
             </Grid.Column>
-            <Grid.Column></Grid.Column>
+            <Grid.Column>
+              <Placeholder>
+                <Placeholder.Header>
+                  <Placeholder.Line />
+                  <Placeholder.Line />
+                </Placeholder.Header>
+              </Placeholder>
+            </Grid.Column>
           </Grid.Row>
         </Grid>
       </Card>
@@ -90,33 +95,12 @@ const BasketList = ({ basket, setStage }) => {
     });
   };
 
-  const BackToBrowseButton = withRouter(({ history }) => (
-    <Button
-      onClick={() => {
-        history.push("/");
-      }}
-    >
-      Back to browse
-    </Button>
-  ));
-
   return (
     <div className="basket-list">
-      <Segment vertical>
-        <Segment vertical>
-          <Header as="h2">Your current basket:</Header>
-        </Segment>
-        <Segment>
-          <Grid columns={2} divided="vertically">
-            {itemsLoading ? renderBasketPlaceholer() : renderBasket()}
-          </Grid>
-        </Segment>
-      </Segment>
-      <Segment vertical>
-        <BackToBrowseButton />
-        <Button floated="right" onClick={() => setStage("delivery")} positive>
-          Proceed with order
-        </Button>
+      <Segment>
+        <Grid columns={2} divided="vertically">
+          {itemsLoading ? renderBasketPlaceholer() : renderBasket()}
+        </Grid>
       </Segment>
     </div>
   );
