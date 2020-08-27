@@ -3,7 +3,6 @@ import StepStrip from "./StepStrip";
 import { Segment } from "semantic-ui-react";
 import CheckoutBreadcrumb from "./checkout/CheckoutBreadcrumb";
 import Basket from "./checkout/Basket";
-import BasketList from "./checkout/BasketList";
 import OrderDetails from "./checkout/OrderDetails";
 import OrderConfirm from "./checkout/OrderConfirm";
 

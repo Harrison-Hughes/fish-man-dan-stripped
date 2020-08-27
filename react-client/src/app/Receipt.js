@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { Header, Segment, Tab, Placeholder, Table } from "semantic-ui-react";
+import {
+  Header,
+  Segment,
+  Tab,
+  Placeholder,
+  Table,
+  Button,
+  Container,
+  Grid,
+  Form,
+} from "semantic-ui-react";
 
 import StepStrip from "./StepStrip";
 import AddressCard from "./checkout/AddresssCard";
@@ -10,6 +20,9 @@ import BasketList from "./checkout/BasketList";
 const Receipt = ({ match }) => {
   const [receiptLoading, setReceiptLoading] = useState(true);
   const [order, setOrder] = useState({});
+  const [cancelConfirm, setCancelConfirm] = useState(false);
+  const [cancelCheckbox, setCancelCheckbox] = useState(false);
+  const [cancelLoading, setCancelLoading] = useState(false);
   const receipt_code = match.params.receipt_code;
 
   useEffect(() => {
@@ -44,40 +57,169 @@ const Receipt = ({ match }) => {
   };
 
   const infoPane = () => {
+    let createDate = new Date(order.created_at);
+    let updateDate = new Date(order.updated_at);
     return (
       <div className="info-pane">
-        {/* <Segment vertical>
-          <Header as="h3">Order status: {order.status}</Header>
+        <Segment vertical>
+          <Header as="h3">Order information:</Header>
         </Segment>
         <Segment vertical>
-          <Header as="h3">Order reference: {order.reference}</Header>
-        </Segment> */}
-        <Table basic="very" celled>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>
-                <Header as="h4">Order status:</Header>
-              </Table.Cell>
-              <Table.Cell warning={order.status === "pending confirmation"}>
-                {order.status}
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <Header as="h4">Order reference:</Header>
-              </Table.Cell>
-              <Table.Cell>{order.reference}</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <Header as="h4">Order status:</Header>
-              </Table.Cell>
-              <Table.Cell>{order.status}</Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
+          <div className="table-padding">
+            <Table basic="very" celled>
+              <Table.Body>
+                <Table.Row>
+                  <Table.Cell>
+                    <Header as="h4">Order reference:</Header>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Header as="h4">{order.reference.toUpperCase()}</Header>
+                  </Table.Cell>
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>
+                    <Header as="h4">Order status:</Header>
+                  </Table.Cell>
+                  {orderStatusCell()}
+                </Table.Row>
+                <Table.Row>
+                  <Table.Cell>
+                    <Header as="h4">Order placed at:</Header>
+                  </Table.Cell>
+                  <Table.Cell>
+                    <Header as="h4">{niceDate(createDate)}</Header>
+                  </Table.Cell>
+                </Table.Row>
+                {order.tatus !== "pending" ? (
+                  <Table.Row>
+                    <Table.Cell>
+                      <Header as="h4">Order status updated at:</Header>
+                    </Table.Cell>
+                    <Table.Cell>
+                      <Header as="h4">{niceDate(updateDate)}</Header>
+                    </Table.Cell>
+                  </Table.Row>
+                ) : null}
+              </Table.Body>
+            </Table>
+          </div>
+        </Segment>
       </div>
     );
+  };
+
+  const cancelOrder = () => {
+    setCancelLoading(true);
+    API.updateOrderStatus(order.reference, "cancelled")
+      .then((resp) => {
+        setCancelLoading(false);
+        if (!!resp.error) {
+          console.log(resp.error);
+        } else setOrder(resp);
+      })
+      .catch(() => console.log("server offline"));
+  };
+
+  const cancelOrderBar = () => {
+    if (order.status !== "denied" && order.status !== "cancelled") {
+      if (cancelConfirm) {
+        return (
+          <Segment vertical>
+            <Grid columns={2} divided>
+              <Grid.Row>
+                <Grid.Column>
+                  <Header sub as="h4">
+                    Are you sure you want to cancel this order?{" "}
+                  </Header>
+                  <Form>
+                    <Form.Checkbox
+                      required
+                      label="I understand that this cannot be undone"
+                      onChange={() => setCancelCheckbox(!cancelCheckbox)}
+                      checked={cancelCheckbox}
+                    />
+                  </Form>
+                </Grid.Column>
+                <Grid.Column>
+                  <Container textAlign="right">
+                    <Button
+                      color="red"
+                      loading={cancelLoading}
+                      disabled={!cancelCheckbox}
+                      onClick={() => {
+                        cancelOrder();
+                        setCancelConfirm(false);
+                        setCancelCheckbox(false);
+                      }}
+                    >
+                      Yes, cancel order!
+                    </Button>
+                    <Button
+                      primary
+                      onClick={() => {
+                        setCancelConfirm(false);
+                        setCancelCheckbox(false);
+                      }}
+                    >
+                      Don't cancel order!
+                    </Button>
+                  </Container>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Segment>
+        );
+      } else {
+        return (
+          <Segment vertical>
+            <Container textAlign="right">
+              <Button onClick={() => setCancelConfirm(true)} color="red">
+                Cancel Order
+              </Button>
+            </Container>
+          </Segment>
+        );
+      }
+    }
+  };
+
+  const orderStatusCell = () => {
+    if (order.status === "confirmed") {
+      return (
+        <Table.Cell positive>
+          <Header as="h4">Confirmed</Header>
+        </Table.Cell>
+      );
+    } else if (order.status === "denied") {
+      return (
+        <Table.Cell negative>
+          <Header as="h4">Denied</Header>
+        </Table.Cell>
+      );
+    } else if (order.status === "cancelled") {
+      return (
+        <Table.Cell negative>
+          <Header as="h4">Cancelled</Header>
+        </Table.Cell>
+      );
+    } else {
+      return (
+        <Table.Cell warning>
+          <Header as="h4">Pending confirmation from vendor</Header>
+        </Table.Cell>
+      );
+    }
+  };
+
+  const niceDate = (date) => {
+    let niceDate = date
+      .toISOString()
+      .split("T")[0]
+      .split("-")
+      .reverse()
+      .join("/");
+    let niceTime = date.toLocaleTimeString().split(":").slice(0, -1).join(":");
+    return niceTime + ", " + niceDate;
   };
 
   const itemsPane = () => {
@@ -152,8 +294,11 @@ const Receipt = ({ match }) => {
       <div className="receipt-body">
         <Segment vertical>
           <Header as="h2">Order Receipt:</Header>
+        </Segment>
+        <Segment vertical>
           <Tab panes={receiptLoading ? loadingPanes() : receiptPanes()} />
         </Segment>
+        {cancelOrderBar()}
       </div>
     </div>
   );

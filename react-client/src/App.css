@@ -114,7 +114,11 @@
 .padded-div {
   padding: 0 0.5em 0.5em 1em;
 }
-/* 
-.feed-content {
-  background-color: white;
-} */
+
+.table-padding {
+  padding: 0 1em 0em 1em;
+}
+
+.float-right-div {
+  float: right;
+}

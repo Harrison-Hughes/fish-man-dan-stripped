@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   post "/validate_address", to: "addresses#validate_address"
 
   get "/order/:order_reference", to: "orders#show"
-  post "/order/cancel_order/:order_reference", to: "orders#cancel_order"
+  patch "/order/update_order_status/:order_reference", to: "orders#update_order_status"
 end

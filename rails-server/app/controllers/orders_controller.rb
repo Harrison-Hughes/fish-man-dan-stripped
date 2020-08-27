@@ -12,9 +12,13 @@ class OrdersController < ApplicationController
     end
   end
 
-  def cancel_order
+  def update_order_status
     order = Order.find_by(reference: params[:order_reference])
-    
+    if order.update({status: order_params[:status]})
+      render json: order
+    else 
+      render json: {error: 'could not cancel order'}
+    end
   end
 
   def create
