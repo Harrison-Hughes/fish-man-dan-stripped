@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-
+import API from "../../API";
 import {
   Card,
   Grid,
@@ -10,7 +10,6 @@ import {
   List,
   Button,
 } from "semantic-ui-react";
-import API from "../../API";
 
 const BasketList = ({ basket, setStage }) => {
   const [itemsLoading, setItemsLoading] = useState(true);
@@ -104,6 +103,9 @@ const BasketList = ({ basket, setStage }) => {
   return (
     <div className="basket-list">
       <Segment vertical>
+        <Segment vertical>
+          <Header as="h2">Your current basket:</Header>
+        </Segment>
         <Segment>
           <Grid columns={2} divided="vertically">
             {itemsLoading ? renderBasketPlaceholer() : renderBasket()}
@@ -112,7 +114,6 @@ const BasketList = ({ basket, setStage }) => {
       </Segment>
       <Segment vertical>
         <BackToBrowseButton />
-
         <Button floated="right" onClick={() => setStage("delivery")} positive>
           Proceed with order
         </Button>

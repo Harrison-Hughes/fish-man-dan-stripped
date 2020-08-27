@@ -94,3 +94,13 @@
 .button-group-with-right-margin {
   margin: 0 0.25em 0 0;
 }
+
+.bottom-segment {
+  margin-bottom: 10em;
+}
+
+.receipt-body {
+  max-width: 50em;
+  margin: auto;
+  text-align: left;
+}
