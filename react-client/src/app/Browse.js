@@ -8,18 +8,18 @@ import {
   Button,
   Container,
   Header,
-  Label,
+  Icon,
 } from "semantic-ui-react";
-import BrowseFilter from "./BrowseFilter";
 import PlaceholderItemCardGrid from "./item-card/PlaceholderItemCardGrid";
 import { withRouter } from "react-router-dom";
+import ProductFilter from "./ProductFilter";
 
 const Browse = ({ basket, setBasket }) => {
   const [itemsLoading, setItemsLoading] = useState(true);
   const [items, setItems] = useState([]);
-  const [itemFilter, setItemFilter] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [welcomePanel, setWelcomePanel] = useState(true);
+  const [listLayout, setListLayout] = useState(false);
 
   useEffect(() => {
     API.getItems()
@@ -35,12 +35,12 @@ const Browse = ({ basket, setBasket }) => {
       });
   }, []);
 
-  useEffect(() => setItemFilter(""), []);
+  // useEffect(() => setItemFilter(""), []);
 
   useEffect(() => {
     let filteredItems = items;
     setFilteredItems(filteredItems);
-  }, [items, itemFilter]);
+  }, [items]);
 
   const CheckoutButton = withRouter(({ history }) => (
     <Button
@@ -65,8 +65,8 @@ const Browse = ({ basket, setBasket }) => {
             <Header as="h2">Welcome to the fish-man-dan order portal!</Header>
             <Header as="h4">
               This portal has been designed to create a streamlined and
-              easy-to-use fish ordering service! On this page, you can see all
-              the produce on offer, complete with information regarding it's
+              easy-to-use seafood ordering service! On this page, you can see
+              all the produce on offer, complete with information regarding it's
               pricing, sizing, and quality. To add an item to you basket, simply
               click on the item's card, then toggle the controls to select how
               much you want. (Some items can be requested in custom amounts - if
@@ -86,12 +86,36 @@ const Browse = ({ basket, setBasket }) => {
         </Segment>
       ) : null}
       <Segment vertical>
-        <Grid columns={2} divided>
+        <Grid columns={3} divided>
           <Grid.Row>
-            <Grid.Column>
-              <BrowseFilter />
+            <Grid.Column width={7}>
+              <ProductFilter
+                items={items}
+                setFilteredItems={setFilteredItems}
+              />
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width={4}>
+              <Button basic active>
+                Layout:
+              </Button>
+              <Button.Group>
+                <Button
+                  icon
+                  active={!listLayout}
+                  onClick={() => setListLayout(false)}
+                >
+                  <Icon name="grid layout" />
+                </Button>
+                <Button
+                  icon
+                  active={listLayout}
+                  onClick={() => setListLayout(true)}
+                >
+                  <Icon name="list" />
+                </Button>
+              </Button.Group>
+            </Grid.Column>
+            <Grid.Column width={4}>
               <CheckoutButton />
             </Grid.Column>
           </Grid.Row>
@@ -102,6 +126,7 @@ const Browse = ({ basket, setBasket }) => {
           <PlaceholderItemCardGrid />
         ) : (
           <Items
+            listLayout={listLayout}
             filteredItems={filteredItems}
             basket={basket}
             setBasket={setBasket}

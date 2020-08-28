@@ -11,6 +11,7 @@ const ItemCardInteractive = ({
   setBasket,
   selectedItemID,
   setSelectedItemID,
+  listLayout,
 }) => {
   const itemInBasket = () => {
     return !!basket.find((i) => i.item_id === item.id);
@@ -109,7 +110,7 @@ const ItemCardInteractive = ({
   };
 
   return (
-    <Card link>
+    <Card link fluid={listLayout}>
       {inBasketLabel()}
       <Card.Content onClick={() => onCardClick()}>
         <Card.Header>{item.name}</Card.Header>

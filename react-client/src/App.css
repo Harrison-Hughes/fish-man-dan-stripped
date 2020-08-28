@@ -25,6 +25,12 @@
   text-align: left;
 }
 
+.items-restricted {
+  max-width: 40em;
+  margin: auto;
+  text-align: left;
+}
+
 .basket-list {
   max-width: 50em;
   margin: auto;
@@ -121,4 +127,9 @@
 
 .float-right-div {
   float: right;
+}
+
+.browse {
+  max-width: 100em;
+  margin: auto;
 }

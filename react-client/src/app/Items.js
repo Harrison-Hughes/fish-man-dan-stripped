@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import ItemCardInteractive from "./item-card/ItemCardInteractive";
 import { Card } from "semantic-ui-react";
 
-const Items = ({ filteredItems, basket, setBasket }) => {
+const Items = ({ filteredItems, basket, setBasket, listLayout }) => {
   const [selectedItemID, setSelectedItemID] = useState(null);
 
   return (
-    <div className="items">
+    <div className={listLayout ? "items-restricted" : "items"}>
       <Card.Group centered>
         {filteredItems.map((i) => (
           <ItemCardInteractive
+            listLayout={listLayout}
             item={i}
             key={i.id}
             basket={basket}
