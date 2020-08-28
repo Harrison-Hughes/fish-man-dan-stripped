@@ -90,7 +90,7 @@ const Receipt = ({ match }) => {
                     <Header as="h4">{niceDate(createDate)}</Header>
                   </Table.Cell>
                 </Table.Row>
-                {order.tatus !== "pending" ? (
+                {order.status !== "pending" ? (
                   <Table.Row>
                     <Table.Cell>
                       <Header as="h4">Order status updated at:</Header>
@@ -119,6 +119,16 @@ const Receipt = ({ match }) => {
       })
       .catch(() => console.log("server offline"));
   };
+
+  const BackToBrowseButton = withRouter(({ history }) => (
+    <Button
+      onClick={() => {
+        history.push("/");
+      }}
+    >
+      Back to homepage
+    </Button>
+  ));
 
   const cancelOrderBar = () => {
     if (order.status !== "denied" && order.status !== "cancelled") {
@@ -172,14 +182,33 @@ const Receipt = ({ match }) => {
       } else {
         return (
           <Segment vertical>
-            <Container textAlign="right">
-              <Button onClick={() => setCancelConfirm(true)} color="red">
-                Cancel Order
-              </Button>
-            </Container>
+            <Grid columns={2} divided>
+              <Grid.Row>
+                <Grid.Column>
+                  <Container textAlign="left">
+                    <BackToBrowseButton />
+                  </Container>
+                </Grid.Column>
+                <Grid.Column>
+                  <Container textAlign="right">
+                    <Button onClick={() => setCancelConfirm(true)} color="red">
+                      Cancel Order
+                    </Button>
+                  </Container>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Segment>
         );
       }
+    } else {
+      return (
+        <Segment vertical>
+          <Container textAlign="left">
+            <BackToBrowseButton />
+          </Container>
+        </Segment>
+      );
     }
   };
 

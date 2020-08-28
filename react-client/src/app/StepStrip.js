@@ -19,7 +19,7 @@ const StepStrip = ({ currStep }) => {
 
   return (
     <div className="step-strip">
-      <Step.Group unstackable size="small">
+      <Step.Group size="small">
         <Step active={isActive("browse")}>
           <Icon name="shop" />
           <Step.Content>
