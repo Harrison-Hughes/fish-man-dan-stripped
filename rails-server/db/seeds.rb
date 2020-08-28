@@ -21,36 +21,35 @@ items = Item.create([
   {name: 'Brixham wild bass (large)', size: '1kg - 1.5kg',grade: 'Hook and Line', is_frozen: false, price_by_each: false, price_per: '17.95', min: "1", max: "100", fresh: 'fresh' },
   {name: 'Shetland king scallops', size: 'Large',grade: 'Superior', is_frozen: false, price_by_each: false, price_per: '29.95', min: "1", max: "100", fresh: 'fresh' },
   {name: 'Shetland mussels', size: 'Rope grown', grade: 'Superior', is_frozen: false, price_by_each: false, price_per: '5.50', min: "1", max: "100", fresh: 'live' },
-  {name: 'Sashimi grade yellow fin tuna', size: 'Cut to any', fresh: 'fresh', is_frozen: false, price_by_each: false, custom_amount: true, price_per: '22.5', min: "", max: "",  grade: 'superior' }
-  {name: 'Brixham lemonsole', size: '350g - 450g', fresh: 'fresh', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '6.00', min: "1", max: "100",  grade: 'Superior' }
-  {name: 'Local whole plaice', size: '350g - 550g', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '4.00', min: "1", max: "100",  grade: 'Superior', fresh: 'fresh' }
+  {name: 'Sashimi grade yellow fin tuna', size: 'Cut to any', fresh: 'fresh', is_frozen: false, price_by_each: false, custom_amount: true, price_per: '22.5', min: "", max: "",  grade: 'superior' },
+  {name: 'Brixham lemonsole', size: '350g - 450g', fresh: 'fresh', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '6.00', min: "1", max: "100",  grade: 'Superior' },
+  {name: 'Local whole plaice', size: '350g - 550g', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '4.00', min: "1", max: "100",  grade: 'Superior', fresh: 'fresh' },
   {name: 'Brixham monkfish fillet skinless and boneless', size: 'Cut to any', fresh: 'fresh', is_frozen: false, price_by_each: false, custom_amount: true, price_per: '19.95', min: "1", max: "100",  grade: 'superior' },
-  {name: 'Large shetland mackerel', size: '350g - 550g',  grade: 'Superior', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '6.50', min: 1"", max: "100", fresh: 'fresh' }
-  {name: 'Falmouth whole sardines', size: 'Whole',  grade: 'Superior', is_frozen: false, price_by_each: false , custom_amount: true, price_per: '5.95', min: "", max: "", fresh: 'fresh' }
-  {name: 'Falmouth sardine fillets', size: 'Fillet',  grade: 'Superior', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '8.95', min: "1", max: "100", fresh: 'fresh' }
-  {name: 'Pie mix (cod, hake, salmon)', size: 'Any amount',  grade: 'Superior', is_frozen: false, price_by_each: false, custom_amount: true, price_per: '8.95', min: "1", max: "100", fresh: 'fresh' }
-  {name: 'Devon Cooked lobster', size: '500g - 550g',  grade: 'Devon', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '12.50', min: "1", max: "100", fresh: 'fresh/cooked' }
-  {name: 'Devon Hand picked crab meat (mixed)', size: '250g',  grade: '1/2 white, 1/2 brown', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '8.95', min: "1", max: "100", fresh: 'fresh/cooked' }
-  {name: 'Devon Hand picked crab meat', size: '250g',  grade: 'All white', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '14.95', min: "1", max: "100", fresh: 'fresh/cooked' }
-  {name: 'Fresh raw king prawns', size: '500g',  grade: 'From France', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '18.00', min: "1", max: "100", fresh: 'fresh/raw' }
-  {name: 'Dorset oysters', size: 'Large',  grade: 'Superior', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '1.00', min: "1", max: "100", fresh: 'live' }
-  {name: 'Dorset pallourde clams', size: 'N/A',  grade: 'Superior', is_frozen: false , price_by_each: false, custom_amount: true, price_per: '10.00', min: "", max: "", fresh: 'live' }
-  {name: 'Fresh natural smoked haddock', size: '350g - 600g',  grade: 'Fresh/smoked', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '12.95', min: "1", max: "100", fresh: 'fresh' }
-  {name: 'Scottish long sliced smoked salmon', size: '200g',  grade: 'Fresh/smoked', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '6.00', min: "1", max: "100", fresh: 'fresh' }
-  {name: 'Loch fyne kippers', size: '300g - 350g',  grade: 'Fresh/smoked', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '9.95', min: "1", max: "100", fresh: 'fresh' }
+  {name: 'Large shetland mackerel', size: '350g - 550g',  grade: 'Superior', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '6.50', min: "1", max: "100", fresh: 'fresh' },
+  {name: 'Falmouth whole sardines', size: 'Whole',  grade: 'Superior', is_frozen: false, price_by_each: false , custom_amount: true, price_per: '5.95', min: "", max: "", fresh: 'fresh' },
+  {name: 'Falmouth sardine fillets', size: 'Fillet',  grade: 'Superior', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '8.95', min: "1", max: "100", fresh: 'fresh' },
+  {name: 'Pie mix (cod, hake, salmon)', size: 'Any amount',  grade: 'Superior', is_frozen: false, price_by_each: false, custom_amount: true, price_per: '8.95', min: "1", max: "100", fresh: 'fresh' },
+  {name: 'Devon Cooked lobster', size: '500g - 550g',  grade: 'Devon', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '12.50', min: "1", max: "100", fresh: 'fresh/cooked' },
+  {name: 'Devon Hand picked crab meat (mixed)', size: '250g',  grade: '1/2 white, 1/2 brown', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '8.95', min: "1", max: "100", fresh: 'fresh/cooked' },
+  {name: 'Devon Hand picked crab meat', size: '250g',  grade: 'All white', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '14.95', min: "1", max: "100", fresh: 'fresh/cooked' },
+  {name: 'Fresh raw king prawns', size: '500g',  grade: 'From France', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '18.00', min: "1", max: "100", fresh: 'fresh/raw' },
+  {name: 'Dorset oysters', size: 'Large',  grade: 'Superior', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '1.00', min: "1", max: "100", fresh: 'live' },
+  {name: 'Dorset pallourde clams', size: 'N/A',  grade: 'Superior', is_frozen: false , price_by_each: false, custom_amount: true, price_per: '10.00', min: "", max: "", fresh: 'live' },
+  {name: 'Fresh natural smoked haddock', size: '350g - 600g',  grade: 'Fresh/smoked', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '12.95', min: "1", max: "100", fresh: 'fresh' },
+  {name: 'Scottish long sliced smoked salmon', size: '200g',  grade: 'Fresh/smoked', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '6.00', min: "1", max: "100", fresh: 'fresh' },
+  {name: 'Loch fyne kippers', size: '300g - 350g',  grade: 'Fresh/smoked', is_frozen: false, price_by_each: false, custom_amount: false, price_per: '9.95', min: "1", max: "100", fresh: 'fresh' },
   {name: 'Farmed bass', size: '400g - 600g', fresh: 'fresh', is_frozen: false, price_by_each: true, price_per: '5.00', min: "1", max: "100",  grade: 'Farmed in greece' },
-  {name: 'Farmed bream', size: '400g - 600g',  grade: 'Farmed in Greece', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '5.00', min: "1", max: "100", fresh: 'Fresh' }
-  
+  {name: 'Farmed bream', size: '400g - 600g',  grade: 'Farmed in Greece', is_frozen: false, price_by_each: true, custom_amount: false, price_per: '5.00', min: "1", max: "100", fresh: 'Fresh' },
   {name: 'Cod, bacon and brie fishcakes', size: '115g', fresh: '', is_frozen: true, price_by_each: true , price_per: '1.50', min: "1", max: "100",  grade: '' },
-  {name: 'Smoked haddock and mozzarella fish cakes', size: '115g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '1.50', min: "1", max: "100", fresh: '' }
-  {name: 'Thai rosti fish cakes', size: '115g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '1.50', min: "1", max: "100", fresh: '' }
-  {name: 'Tempura battered prawns', size: '500g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '7.50', min: "1", max: "100", fresh: '' }
-  {name: 'Butterfly breaded king prawns', size: '500g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '7.50', min: "1", max: "100", fresh: '' }
-  {name: 'Filo wrapped king prawns', size: '500g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '7.50', min: "1", max: "100", fresh: '' }
-  {name: 'Shell-on cooked prawns', size: '500g',  grade: '', is_frozen: true, price_by_each: false, custom_amount: false, price_per: '9.00', min: "1", max: "100", fresh: '' }
-  {name: 'Peeled tiger prawns', size: '1kg',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '10.00', min: "1", max: "100", fresh: '' }
-  {name: 'Whole tiger prawns', size: '1kg',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '10.00', min: "1", max: "100", fresh: '' }
-  {name: 'Panco coated squid rings', size: '700g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '10.00', min: "1", max: "100", fresh: '' }
-  {name: 'Salt and pepper squid', size: '1kg',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '15.00', min: "1", max: "100", fresh: '' } 
-  {name: 'Breaded plaice goujons', size: '450g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '5.50', min: "1", max: "100", fresh: '' }
+  {name: 'Smoked haddock and mozzarella fish cakes', size: '115g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '1.50', min: "1", max: "100", fresh: '' },
+  {name: 'Thai rosti fish cakes', size: '115g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '1.50', min: "1", max: "100", fresh: '' },
+  {name: 'Tempura battered prawns', size: '500g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '7.50', min: "1", max: "100", fresh: '' },
+  {name: 'Butterfly breaded king prawns', size: '500g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '7.50', min: "1", max: "100", fresh: '' },
+  {name: 'Filo wrapped king prawns', size: '500g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '7.50', min: "1", max: "100", fresh: '' },
+  {name: 'Shell-on cooked prawns', size: '500g',  grade: '', is_frozen: true, price_by_each: false, custom_amount: false, price_per: '9.00', min: "1", max: "100", fresh: '' },
+  {name: 'Peeled tiger prawns', size: '1kg',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '10.00', min: "1", max: "100", fresh: '' },
+  {name: 'Whole tiger prawns', size: '1kg',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '10.00', min: "1", max: "100", fresh: '' },
+  {name: 'Panco coated squid rings', size: '700g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '10.00', min: "1", max: "100", fresh: '' },
+  {name: 'Salt and pepper squid', size: '1kg',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '15.00', min: "1", max: "100", fresh: '' } ,
+  {name: 'Breaded plaice goujons', size: '450g',  grade: '', is_frozen: true, price_by_each: true, custom_amount: false, price_per: '5.50', min: "1", max: "100", fresh: '' },
   ])
