@@ -33,6 +33,7 @@ const OrderConfirm = ({ setStage, address, basket }) => {
           setEmailError(true);
         } else {
           setFormSubmitting(false);
+          localStorage.fishManDanLocalBasket = JSON.stringify([]);
           setConfirmedOrderReference(resp.reference);
         }
       })
@@ -70,6 +71,7 @@ const OrderConfirm = ({ setStage, address, basket }) => {
           <Form>
             <Form.Field inline>
               <Form.Input
+                error={emailError}
                 name="email"
                 label="E-mail address:"
                 onChange={handleChange}
