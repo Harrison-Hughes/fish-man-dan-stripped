@@ -17,6 +17,7 @@ const OrderConfirm = ({ setStage, address, basket }) => {
   }
 
   const submitOrder = () => {
+    setFormSubmitting(true);
     let order = {
       order: {
         request_objects: basket,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Grid, Placeholder, Header, Segment } from "semantic-ui-react";
+import { Grid, Header, Segment, Icon } from "semantic-ui-react";
 import API from "../../API";
 
 const BasketCard = ({ basket }) => {
@@ -31,52 +31,45 @@ const BasketCard = ({ basket }) => {
 
   const renderBasketPlaceholer = () => {
     return (
-      <Card fluid>
-        <Grid columns={2} divided>
-          <Grid.Row>
-            <Grid.Column>
-              <Placeholder>
-                <Placeholder.Header>
-                  <Placeholder.Line />
-                  <Placeholder.Line />
-                </Placeholder.Header>
-              </Placeholder>
-            </Grid.Column>
-            <Grid.Column></Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Card>
+      <Segment placeholder>
+        <Header icon>
+          <Icon loading name="spinner" />
+          Loading items
+        </Header>
+      </Segment>
     );
   };
 
   const renderBasket = () => {
-    return itemsInBasket.map((item) => {
-      return (
-        <Grid.Row key={item.id} columns={2}>
-          <Grid.Column className="basket-card-grid-column">
-            <Header className="basket-card-header" as="h4">
-              {item.name}
-              {item.is_frozen ? " (frozen)" : null}
-            </Header>
-          </Grid.Column>
-          <Grid.Column className="basket-card-grid-column-2">
-            <div className="basket-card-item-quantity">
-              <Header as="h4">
-                {item.custom_amount ? null : `Qty:`} {itemQuantity(item)}
-              </Header>
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-      );
-    });
+    return (
+      <Grid columns={2} divided="vertically">
+        {itemsInBasket.map((item) => {
+          return (
+            <Grid.Row key={item.id} columns={2}>
+              <Grid.Column className="basket-card-grid-column">
+                <Header className="basket-card-header" as="h4">
+                  {item.name}
+                  {item.is_frozen ? " (frozen)" : null}
+                </Header>
+              </Grid.Column>
+              <Grid.Column className="basket-card-grid-column-2">
+                <div className="basket-card-item-quantity">
+                  <Header as="h4">
+                    {item.custom_amount ? null : `Qty:`} {itemQuantity(item)}
+                  </Header>
+                </div>
+              </Grid.Column>
+            </Grid.Row>
+          );
+        })}
+      </Grid>
+    );
   };
 
   return (
     <div className="basket-card">
       <Segment>
-        <Grid columns={2} divided="vertically">
-          {itemsLoading ? renderBasketPlaceholer() : renderBasket()}
-        </Grid>
+        {itemsLoading ? renderBasketPlaceholer() : renderBasket()}
       </Segment>
     </div>
   );
