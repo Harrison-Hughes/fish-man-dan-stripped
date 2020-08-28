@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 import API from "../API";
 import StepStrip from "./StepStrip";
 import Items from "./Items";
-import { Grid, Segment, Button } from "semantic-ui-react";
+import {
+  Grid,
+  Segment,
+  Button,
+  Container,
+  Header,
+  Label,
+} from "semantic-ui-react";
 import BrowseFilter from "./BrowseFilter";
 import PlaceholderItemCardGrid from "./item-card/PlaceholderItemCardGrid";
 import { withRouter } from "react-router-dom";
@@ -12,6 +19,7 @@ const Browse = ({ basket, setBasket }) => {
   const [items, setItems] = useState([]);
   const [itemFilter, setItemFilter] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
+  const [welcomePanel, setWelcomePanel] = useState(true);
 
   useEffect(() => {
     API.getItems()
@@ -42,7 +50,7 @@ const Browse = ({ basket, setBasket }) => {
         history.push("/checkout");
       }}
     >
-      Proceed to checkout
+      My basket ({basket.length === 0 ? "empty" : basket.length})
     </Button>
   ));
 
@@ -51,6 +59,32 @@ const Browse = ({ basket, setBasket }) => {
       <Segment vertical>
         <StepStrip currStep={"browse"} />
       </Segment>
+      {welcomePanel ? (
+        <Segment vertical>
+          <Container>
+            <Header as="h2">Welcome to the fish-man-dan order portal!</Header>
+            <Header as="h4">
+              This portal has been designed to create a streamlined and
+              easy-to-use fish ordering service! On this page, you can see all
+              the produce on offer, complete with information regarding it's
+              pricing, sizing, and quality. To add an item to you basket, simply
+              click on the item's card, then toggle the controls to select how
+              much you want. (Some items can be requested in custom amounts - if
+              this is the case, simply write how much you'd like!)
+            </Header>
+            <Header as="h4">
+              Once you have selected all the items you'd like, click 'My
+              basket', and follow the steps provided to place your order. Once
+              you have given all the required information, a virtual receipt
+              will become available to help you track or cancel your order.
+              Happy fishing!
+            </Header>
+            <Button positive onClick={() => setWelcomePanel(false)}>
+              Got it, thanks!
+            </Button>
+          </Container>
+        </Segment>
+      ) : null}
       <Segment vertical>
         <Grid columns={2} divided>
           <Grid.Row>
