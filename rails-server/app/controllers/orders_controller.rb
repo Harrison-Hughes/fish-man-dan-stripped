@@ -21,14 +21,14 @@ class OrdersController < ApplicationController
     end
   end
 
-  def email_confirm
-    order = Order.find_by(reference: params[:order_reference])
-    if order.update({email_confirmed: true})
-      render json: order
-    else 
-      render json: {error: 'could not confirm order'}
-    end
-  end
+  # def email_confirm
+  #   order = Order.find_by(reference: params[:order_reference])
+  #   if order.update({email_confirmed: true})
+  #     render json: order
+  #   else 
+  #     render json: {error: 'could not confirm order'}
+  #   end
+  # end
 
   def create
     if !is_email_valid(order_params[:email])
