@@ -40,8 +40,8 @@ Rails.application.configure do
     port:                 587,
     domain:               'gmail.com',
     user_name:            'fishmandanorderportal@gmail.com',
-    password:             'geckowamp!10',
-    authentication:       'login',
+    password:             ENV["GMAIL_USERNAME"],
+    authentication:       ENV["GMAIL_PASSWORD"],
     enable_starttls_auto: true }
 
   # Print deprecation notices to the Rails logger.
