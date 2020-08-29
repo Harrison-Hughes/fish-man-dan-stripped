@@ -12,6 +12,23 @@ class OrdersController < ApplicationController
     end
   end
 
+  def show_and_confirm
+    order = Order.find_by(reference: params[:order_reference])
+    if !order
+      render json: {error: 'order not found'}
+    else 
+      if order.email_confirmed
+        render json: {just_confirmed: false, order: {id: order.id, status: order.status, address: order.address, requests: order.requests, reference: order.reference, email: order.email, created_at: order.created_at, updated_at: order.updated_at}}
+      else 
+        if order.update({email_confirmed: true})
+          render json: {just_confirmed: true, order: {id: order.id, status: order.status, address: order.address, requests: order.requests, reference: order.reference, email: order.email, created_at: order.created_at, updated_at: order.updated_at}}
+        else 
+          render json: {error: 'could not confirm order'}
+        end
+      end
+    end
+  end
+
   def update_order_status
     order = Order.find_by(reference: params[:order_reference])
     if order.update({status: order_params[:status]})
