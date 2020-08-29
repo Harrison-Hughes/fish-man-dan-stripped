@@ -6,7 +6,7 @@ import AddressCard from "./AddresssCard";
 import BasketCard from "./BasketCard";
 import API from "../../API";
 
-const OrderConfirm = ({ setStage, address, basket }) => {
+const OrderConfirm = ({ setStage, address, basket, setBasket }) => {
   const [formSubmitting, setFormSubmitting] = useState(false);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -36,6 +36,7 @@ const OrderConfirm = ({ setStage, address, basket }) => {
           setFormSubmitting(false);
           localStorage.fishManDanLocalBasket = JSON.stringify([]);
           setConfirmedOrderReference(resp.reference);
+          setBasket([]);
         }
       })
       .catch(() => {

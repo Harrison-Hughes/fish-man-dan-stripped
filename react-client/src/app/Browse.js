@@ -121,18 +121,19 @@ const Browse = ({ basket, setBasket }) => {
           </Grid.Row>
         </Grid>
       </Segment>
-      <Segment vertical>
-        {itemsLoading ? (
-          <PlaceholderItemCardGrid />
-        ) : (
+
+      {itemsLoading ? (
+        <PlaceholderItemCardGrid />
+      ) : (
+        <Segment vertical>
           <Items
             listLayout={listLayout}
             filteredItems={filteredItems}
             basket={basket}
             setBasket={setBasket}
-          />
-        )}
-      </Segment>
+          ></Items>
+        </Segment>
+      )}
     </div>
   );
 };

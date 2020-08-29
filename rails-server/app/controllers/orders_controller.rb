@@ -49,6 +49,9 @@ class OrdersController < ApplicationController
       
       if order.save 
         if !Request.make_requests(order, request_objects).any? { |r| r.nil? }
+
+          OrderMailer.with(email_address: order_params[:email], order_reference: reference).order_confirm_email.deliver_later
+
           render json: order
         else 
           order.destroy

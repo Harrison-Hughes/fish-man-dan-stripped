@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import {
   Header,
   Segment,
@@ -18,6 +18,7 @@ import API from "../API";
 import BasketList from "./checkout/BasketList";
 
 const Receipt = ({ match }) => {
+  const [orderNotFound, setOrderNotFound] = useState(false);
   const [receiptLoading, setReceiptLoading] = useState(true);
   const [order, setOrder] = useState({});
   const [cancelConfirm, setCancelConfirm] = useState(false);
@@ -29,8 +30,12 @@ const Receipt = ({ match }) => {
     API.getOrder(receipt_code)
       .then((resp) => {
         console.log("resp", resp);
-        setOrder(resp);
-        setReceiptLoading(false);
+        if (resp.error === "order not found") {
+          setOrderNotFound(true);
+        } else {
+          setOrder(resp);
+          setReceiptLoading(false);
+        }
       })
       .catch(console.log("server offline"));
   }, [receipt_code]);
@@ -112,12 +117,19 @@ const Receipt = ({ match }) => {
     setCancelLoading(true);
     API.updateOrderStatus(order.reference, "cancelled")
       .then((resp) => {
+        setCancelConfirm(false);
+        setCancelCheckbox(false);
         setCancelLoading(false);
         if (!!resp.error) {
           console.log(resp.error);
         } else setOrder(resp);
       })
-      .catch(() => console.log("server offline"));
+      .catch(() => {
+        setCancelConfirm(false);
+        setCancelCheckbox(false);
+        setCancelLoading(false);
+        console.log("server offline");
+      });
   };
 
   const BackToBrowseButton = withRouter(({ history }) => (
@@ -158,8 +170,6 @@ const Receipt = ({ match }) => {
                       disabled={!cancelCheckbox}
                       onClick={() => {
                         cancelOrder();
-                        setCancelConfirm(false);
-                        setCancelCheckbox(false);
                       }}
                     >
                       Yes, cancel order!
@@ -315,22 +325,24 @@ const Receipt = ({ match }) => {
     );
   };
 
-  return (
-    <div className="receipt">
-      <Segment vertical>
-        <StepStrip currStep={"receipt"} />
-      </Segment>
-      <div className="receipt-body">
+  if (!!orderNotFound) return <Redirect push to={"/receipt/not_found"} />;
+  else
+    return (
+      <div className="receipt">
         <Segment vertical>
-          <Header as="h2">Order Receipt:</Header>
+          <StepStrip currStep={"receipt"} />
         </Segment>
-        <Segment vertical>
-          <Tab panes={receiptLoading ? loadingPanes() : receiptPanes()} />
-        </Segment>
-        {cancelOrderBar()}
+        <div className="receipt-body">
+          <Segment vertical>
+            <Header as="h2">Order Receipt:</Header>
+          </Segment>
+          <Segment vertical>
+            <Tab panes={receiptLoading ? loadingPanes() : receiptPanes()} />
+          </Segment>
+          {cancelOrderBar()}
+        </div>
       </div>
-    </div>
-  );
+    );
 };
 
 export default withRouter(Receipt);

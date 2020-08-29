@@ -25,6 +25,10 @@
   text-align: left;
 }
 
+.wakeup-header {
+  text-align: center;
+}
+
 .items-restricted {
   max-width: 40em;
   margin: auto;
@@ -132,4 +136,8 @@
 .browse {
   max-width: 100em;
   margin: auto;
+}
+
+.receipt-not-found {
+  text-align: center;
 }

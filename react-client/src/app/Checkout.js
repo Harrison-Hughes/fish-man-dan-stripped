@@ -6,7 +6,7 @@ import Basket from "./checkout/Basket";
 import OrderDetails from "./checkout/OrderDetails";
 import OrderConfirm from "./checkout/OrderConfirm";
 
-const Checkout = ({ basket }) => {
+const Checkout = ({ basket, setBasket }) => {
   const [stage, setStage] = useState("basket");
   const [address, setAddress] = useState({
     recipient_name: "",
@@ -31,7 +31,12 @@ const Checkout = ({ basket }) => {
       );
     } else
       return (
-        <OrderConfirm setStage={setStage} address={address} basket={basket} />
+        <OrderConfirm
+          setStage={setStage}
+          address={address}
+          basket={basket}
+          setBasket={setBasket}
+        />
       );
   };
 
