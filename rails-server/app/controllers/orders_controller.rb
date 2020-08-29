@@ -21,6 +21,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  def email_confirm
+    order = Order.find_by(reference: params[:order_reference])
+    if order.update({email_confirmed: true})
+      render json: order
+    else 
+      render json: {error: 'could not confirm order'}
+    end
+  end
+
   def create
     if !is_email_valid(order_params[:email])
       render json: {error: 'invalid email field'}
@@ -36,7 +45,7 @@ class OrdersController < ApplicationController
       end
       
       address = Address.create(order_params[:address])
-      order = Order.new(status: 'pending',  address: address, email: order_params[:email], reference: reference)
+      order = Order.new(status: 'pending',  address: address, email: order_params[:email], reference: reference, email_confirmed: false)
       
       if order.save 
         if !Request.make_requests(order, request_objects).any? { |r| r.nil? }
