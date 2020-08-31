@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2020_08_25_150406) do
     t.string "status"
     t.string "email"
     t.string "reference"
+    t.boolean "email_confirmed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

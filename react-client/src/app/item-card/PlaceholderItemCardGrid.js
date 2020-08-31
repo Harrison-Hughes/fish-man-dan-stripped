@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Placeholder } from "semantic-ui-react";
+import { Card, Placeholder, Header, Segment } from "semantic-ui-react";
 
 const PlaceholderItemCardGrid = () => {
   const placeholderCards = () => {
@@ -28,7 +28,16 @@ const PlaceholderItemCardGrid = () => {
 
   return (
     <div className="items">
-      <Card.Group centered>{placeholderCards()}</Card.Group>
+      <div className="wakeup-header">
+        <Segment vertical>
+          <Header as="h2">
+            We're just waking up the server, this might take a few seconds!
+          </Header>
+        </Segment>
+      </div>
+      <Segment vertical>
+        <Card.Group centered>{placeholderCards()}</Card.Group>
+      </Segment>
     </div>
   );
 };

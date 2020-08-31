@@ -6,6 +6,7 @@ import { Switch, Route } from "react-router-dom";
 import Browse from "./app/Browse";
 import Checkout from "./app/Checkout";
 import Receipt from "./app/Receipt";
+import ReceiptNotFound from "./app/ReceiptNotFound";
 
 function App() {
   const [basket, setBasket] = useState([]);
@@ -26,7 +27,10 @@ function App() {
         <AppHeader />
         <Switch>
           <Route path="/checkout">
-            <Checkout basket={basket} />
+            <Checkout basket={basket} setBasket={setBasket} />
+          </Route>
+          <Route exact path="/receipt/not_found">
+            <ReceiptNotFound />
           </Route>
           <Route path="/receipt/:receipt_code">
             <Receipt />

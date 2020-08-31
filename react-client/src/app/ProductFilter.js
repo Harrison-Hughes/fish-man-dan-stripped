@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Dropdown, Header, Grid } from "semantic-ui-react";
+import { Button, Dropdown } from "semantic-ui-react";
 
 const ProductFilter = ({ items, setFilteredItems }) => {
   const [frozen, setFrozen] = useState("---");
