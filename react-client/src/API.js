@@ -28,14 +28,20 @@ const placeOrder = (order) =>
     body: JSON.stringify(order),
   }).then(jsonify);
 
-const getOrder = (order_reference) =>
-  fetch(`${API_ROOT}/order/${order_reference}`, {
+// const getOrder = (order_reference) =>
+//   fetch(`${API_ROOT}/order/${order_reference}`, {
+//     method: "GET",
+//     header: HEADERS,
+//   }).then(jsonify);
+
+const showAndConfirmOrder = (order_reference) =>
+  fetch(`${API_ROOT}/order_confirm/${order_reference}`, {
     method: "GET",
     header: HEADERS,
   }).then(jsonify);
 
 const updateOrderStatus = (order_reference, status) =>
-  fetch(`${API_ROOT}/order/update_order_status/${order_reference}`, {
+  fetch(`${API_ROOT}/update_order_status/${order_reference}`, {
     method: "PATCH",
     headers: HEADERS,
     body: JSON.stringify({ order: { status: status } }),
@@ -45,6 +51,7 @@ export default {
   getItems,
   validateAddress,
   placeOrder,
-  getOrder,
+  // getOrder,
+  showAndConfirmOrder,
   updateOrderStatus,
 };
