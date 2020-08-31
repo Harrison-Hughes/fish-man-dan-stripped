@@ -10,6 +10,7 @@ import {
   Container,
   Grid,
   Form,
+  Message,
 } from "semantic-ui-react";
 
 import StepStrip from "./StepStrip";
@@ -18,6 +19,7 @@ import API from "../API";
 import BasketList from "./checkout/BasketList";
 
 const Receipt = ({ match }) => {
+  const [justConfirmed, setJustConfirmed] = useState(false);
   const [orderNotFound, setOrderNotFound] = useState(false);
   const [receiptLoading, setReceiptLoading] = useState(true);
   const [order, setOrder] = useState({});
@@ -27,13 +29,14 @@ const Receipt = ({ match }) => {
   const receipt_code = match.params.receipt_code;
 
   useEffect(() => {
-    API.getOrder(receipt_code)
+    API.showAndConfirmOrder(receipt_code)
       .then((resp) => {
         console.log("resp", resp);
         if (resp.error === "order not found") {
           setOrderNotFound(true);
         } else {
-          setOrder(resp);
+          setJustConfirmed(resp.just_confirmed);
+          setOrder(resp.order);
           setReceiptLoading(false);
         }
       })
@@ -333,6 +336,13 @@ const Receipt = ({ match }) => {
           <StepStrip currStep={"receipt"} />
         </Segment>
         <div className="receipt-body">
+          {justConfirmed ? (
+            <Segment vertical>
+              <Message success>
+                <Message.Header>Order confirmed!</Message.Header>
+              </Message>
+            </Segment>
+          ) : null}
           <Segment vertical>
             <Header as="h2">Order Receipt:</Header>
           </Segment>
