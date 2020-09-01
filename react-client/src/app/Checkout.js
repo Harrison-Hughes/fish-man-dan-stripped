@@ -5,9 +5,11 @@ import CheckoutBreadcrumb from "./checkout/CheckoutBreadcrumb";
 import Basket from "./checkout/Basket";
 import OrderDetails from "./checkout/OrderDetails";
 import OrderConfirm from "./checkout/OrderConfirm";
+import ConfirmEmail from "./checkout/ConfirmEmail";
 
 const Checkout = ({ basket, setBasket }) => {
   const [stage, setStage] = useState("basket");
+  const [registeredEmail, setRegisteredEmail] = useState("");
   const [address, setAddress] = useState({
     recipient_name: "",
     line_one: "",
@@ -29,15 +31,17 @@ const Checkout = ({ basket, setBasket }) => {
           setAddress={setAddress}
         />
       );
-    } else
+    } else if (stage === "confirm")
       return (
         <OrderConfirm
           setStage={setStage}
           address={address}
           basket={basket}
           setBasket={setBasket}
+          setRegisteredEmail={setRegisteredEmail}
         />
       );
+    else return <ConfirmEmail registeredEmail={registeredEmail} />;
   };
 
   return (

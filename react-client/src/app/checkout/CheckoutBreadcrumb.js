@@ -13,7 +13,11 @@ const CheckoutBreadcrumb = ({ stage }) => {
       </Breadcrumb.Section>
       <Breadcrumb.Divider icon="right chevron" />
       <Breadcrumb.Section active={stage === "confirm"}>
-        confirm order
+        extra details
+      </Breadcrumb.Section>
+      <Breadcrumb.Divider icon="right chevron" />
+      <Breadcrumb.Section active={stage === "confirm email"}>
+        confirmation
       </Breadcrumb.Section>
     </Breadcrumb>
   );
