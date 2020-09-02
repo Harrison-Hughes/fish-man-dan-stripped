@@ -80,7 +80,7 @@ const Browse = ({ basket, setBasket }) => {
               Happy fishing!
             </Header>
             <Button positive onClick={() => setWelcomePanel(false)}>
-              Got it, thanks!
+              Got it!
             </Button>
           </Container>
         </Segment>
