@@ -1,7 +1,18 @@
 import React from "react";
 import { Button, Header, Segment } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
 
 const ConfirmEmail = ({ registeredEmail }) => {
+  const BackToBrowseButton = withRouter(({ history }) => (
+    <Button
+      onClick={() => {
+        history.push("/");
+      }}
+    >
+      Back to homepage
+    </Button>
+  ));
+
   return (
     <div className="confirm-email">
       <Segment vertical>
@@ -10,7 +21,7 @@ const ConfirmEmail = ({ registeredEmail }) => {
         </Header>
       </Segment>
       <Segment vertical>
-        <Button></Button>
+        <BackToBrowseButton />
       </Segment>
     </div>
   );
