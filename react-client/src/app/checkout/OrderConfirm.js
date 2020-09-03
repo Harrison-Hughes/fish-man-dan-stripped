@@ -42,8 +42,8 @@ const OrderConfirm = ({
           setFormSubmitting(false);
           localStorage.fishManDanLocalBasket = JSON.stringify([]);
           // setConfirmedOrderReference(resp.reference);
-          setBasket([]);
           orderConfirmed();
+          setBasket([]);
         }
       })
       .catch(() => {
@@ -52,6 +52,7 @@ const OrderConfirm = ({
   };
 
   const orderConfirmed = () => {
+    console.log("order confirmed");
     setRegisteredEmail(email);
     setStage("confirm email");
   };
