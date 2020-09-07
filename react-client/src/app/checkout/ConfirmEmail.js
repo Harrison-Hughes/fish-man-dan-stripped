@@ -20,7 +20,7 @@ const ConfirmEmail = ({ registeredEmail }) => {
           Order confirmation e-mail sent to: {registeredEmail}
         </Header>
       </Segment>
-      <Segment vertical>
+      <Segment positive vertical>
         <BackToBrowseButton />
       </Segment>
     </div>

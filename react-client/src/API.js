@@ -41,7 +41,7 @@ const showAndConfirmOrder = (order_reference) =>
   }).then(jsonify);
 
 const updateOrderStatus = (order_reference, status) =>
-  fetch(`${API_ROOT}/update_order_status/${order_reference}`, {
+  fetch(`${API_ROOT}/order/update_order_status/${order_reference}`, {
     method: "PATCH",
     headers: HEADERS,
     body: JSON.stringify({ order: { status: status } }),
