@@ -9,6 +9,7 @@ import {
   Container,
   Header,
   Icon,
+  Pagination,
 } from "semantic-ui-react";
 import PlaceholderItemCardGrid from "./item-card/PlaceholderItemCardGrid";
 import { withRouter } from "react-router-dom";
@@ -18,8 +19,12 @@ const Browse = ({ basket, setBasket }) => {
   const [itemsLoading, setItemsLoading] = useState(true);
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [filteredPaginatedItems, setFilteredPaginatedItems] = useState([]);
   const [welcomePanel, setWelcomePanel] = useState(true);
   const [listLayout, setListLayout] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(12);
 
   useEffect(() => {
     API.getItems()
@@ -28,6 +33,7 @@ const Browse = ({ basket, setBasket }) => {
       })
       .then((resp) => {
         setItemsLoading(false);
+        setTotalPage(Math.ceil(resp.length / itemsPerPage));
         setItems(resp);
       })
       .catch(() => {
@@ -35,12 +41,29 @@ const Browse = ({ basket, setBasket }) => {
       });
   }, []);
 
-  // useEffect(() => setItemFilter(""), []);
+  useEffect(() => {
+    setTotalPage(Math.ceil(filteredItems.length / itemsPerPage));
+  }, [filteredItems, itemsPerPage]);
+
+  useEffect(() => {
+    const calcFilteredPaginatedItems = () => {
+      return filteredItems.filter(
+        (item, i) =>
+          i >= (page - 1) * itemsPerPage && i <= page * itemsPerPage - 1
+      );
+    };
+
+    setFilteredPaginatedItems(calcFilteredPaginatedItems);
+  }, [filteredItems, page, itemsPerPage]);
 
   useEffect(() => {
     let filteredItems = items;
     setFilteredItems(filteredItems);
   }, [items]);
+
+  const pageChange = (e, { activePage }) => {
+    setPage(activePage);
+  };
 
   const CheckoutButton = withRouter(({ history }) => (
     <Button
@@ -102,14 +125,22 @@ const Browse = ({ basket, setBasket }) => {
                 <Button
                   icon
                   active={!listLayout}
-                  onClick={() => setListLayout(false)}
+                  onClick={() => {
+                    setPage(1);
+                    setItemsPerPage(12);
+                    setListLayout(false);
+                  }}
                 >
                   <Icon name="grid layout" />
                 </Button>
                 <Button
                   icon
                   active={listLayout}
-                  onClick={() => setListLayout(true)}
+                  onClick={() => {
+                    setPage(1);
+                    setItemsPerPage(5);
+                    setListLayout(true);
+                  }}
                 >
                   <Icon name="list" />
                 </Button>
@@ -128,12 +159,27 @@ const Browse = ({ basket, setBasket }) => {
         <Segment vertical>
           <Items
             listLayout={listLayout}
-            filteredItems={filteredItems}
+            filteredItems={filteredPaginatedItems}
             basket={basket}
             setBasket={setBasket}
           ></Items>
         </Segment>
       )}
+      <Segment vertical>
+        <Pagination
+          activePage={page}
+          boundaryRange={0}
+          onPageChange={pageChange}
+          secondary
+          pointing
+          defaultActivePage={1}
+          // ellipsisItem={null}
+          firstItem={null}
+          lastItem={null}
+          siblingRange={1}
+          totalPages={totalPage}
+        />
+      </Segment>
     </div>
   );
 };
