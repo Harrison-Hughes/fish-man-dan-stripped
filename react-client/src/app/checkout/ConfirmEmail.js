@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 const ConfirmEmail = ({ registeredEmail }) => {
   const BackToBrowseButton = withRouter(({ history }) => (
     <Button
+      positive
       onClick={() => {
         history.push("/");
       }}

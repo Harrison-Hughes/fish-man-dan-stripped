@@ -9,6 +9,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.boolean :is_frozen
       t.boolean :price_by_each 
       t.string :price_per
+      t.string :species
       t.string :min
       t.string :max
       t.string :grade
