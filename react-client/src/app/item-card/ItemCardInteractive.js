@@ -94,18 +94,20 @@ const ItemCardInteractive = ({
   };
 
   const freshTag = () => {
-    if (!!item.fresh)
-      return <Label color="green">{item.fresh.toLowerCase()}</Label>;
+    if (!!item.fresh) return <Label tag>{item.fresh.toLowerCase()}</Label>;
   };
 
   const gradeTag = () => {
-    if (!!item.grade)
-      return <Label color="orange">{item.grade.toLowerCase()}</Label>;
+    if (
+      !!item.grade
+      // && item.grade.toLowerCase() !== "superior"
+    )
+      return <Label tag>{item.grade.toLowerCase()}</Label>;
   };
 
   const frozenTag = () => {
     if (item.is_frozen) {
-      return <Label color="teal">frozen</Label>;
+      return <Label tag>frozen</Label>;
     }
   };
 
@@ -121,9 +123,9 @@ const ItemCardInteractive = ({
           <span className="meta">Size: {item.size}</span>
         </Card.Meta>
         <Card.Description>
+          {freshTag()}
           {gradeTag()}
           {frozenTag()}
-          {freshTag()}
         </Card.Description>
       </Card.Content>
       {selectedCardForm()}

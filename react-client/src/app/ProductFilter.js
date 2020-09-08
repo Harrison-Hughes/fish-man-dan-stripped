@@ -3,7 +3,7 @@ import { Button, Dropdown } from "semantic-ui-react";
 
 const ProductFilter = ({ items, setFilteredItems }) => {
   const [frozen, setFrozen] = useState("---");
-  const [grade, setGrade] = useState("---");
+  const [species, setSpecies] = useState("---");
   const [fresh, setFresh] = useState("---");
 
   const hypotheticalFilteredItemsLength = (filterType, filterValue) => {
@@ -24,17 +24,17 @@ const ProductFilter = ({ items, setFilteredItems }) => {
       }
     };
 
-    const gradeFilteredItems = () => {
-      if (filterType === "grade") {
+    const speciesFilteredItems = () => {
+      if (filterType === "species") {
         return frozenFilteredItems().filter((item) => {
           if (filterValue === "---") return true;
-          if (item.grade.toLowerCase() === filterValue) return true;
+          if (item.species.toLowerCase() === filterValue) return true;
           else return false;
         });
       } else {
         return frozenFilteredItems().filter((item) => {
-          if (grade === "---") return true;
-          if (item.grade.toLowerCase() === grade) return true;
+          if (species === "---") return true;
+          if (item.species.toLowerCase() === species) return true;
           else return false;
         });
       }
@@ -42,13 +42,13 @@ const ProductFilter = ({ items, setFilteredItems }) => {
 
     const freshFilteredItems = () => {
       if (filterType === "fresh") {
-        return gradeFilteredItems().filter((item) => {
+        return speciesFilteredItems().filter((item) => {
           if (filterValue === "---") return true;
           if (item.fresh.toLowerCase() === filterValue) return true;
           else return false;
         });
       } else {
-        return gradeFilteredItems().filter((item) => {
+        return speciesFilteredItems().filter((item) => {
           if (fresh === "---") return true;
           if (item.fresh.toLowerCase() === fresh) return true;
           else return false;
@@ -81,20 +81,24 @@ const ProductFilter = ({ items, setFilteredItems }) => {
     },
   ];
 
-  const gradeOptions = () => {
+  const speciesOptions = () => {
     if (items.length === 0) return [];
     let options = ["---"];
     items.map((item) => {
-      if (!options.includes(item.grade.toLowerCase()) && item.grade !== "") {
-        options.push(item.grade.toLowerCase());
+      if (
+        !options.includes(item.species.toLowerCase()) &&
+        item.species !== ""
+      ) {
+        options.push(item.species.toLowerCase());
       }
       return null;
     });
-    let optionsKey = options.map((grade) => {
+    let optionsKey = options.map((species) => {
       return {
-        key: grade,
-        text: grade + ` (${hypotheticalFilteredItemsLength("grade", grade)})`,
-        value: grade,
+        key: species,
+        text:
+          species + ` (${hypotheticalFilteredItemsLength("species", species)})`,
+        value: species,
       };
     });
     return optionsKey.filter(
@@ -134,12 +138,12 @@ const ProductFilter = ({ items, setFilteredItems }) => {
         else if (frozen === "not frozen") return item.is_frozen === false;
         else return item.is_frozen === true;
       });
-      let gradeFilteredItems = frozenFilteredItems.filter((item) => {
-        if (grade === "---") return true;
-        if (item.grade.toLowerCase() === grade) return true;
+      let speciesFilteredItems = frozenFilteredItems.filter((item) => {
+        if (species === "---") return true;
+        if (item.species.toLowerCase() === species) return true;
         else return false;
       });
-      let freshFilteredItems = gradeFilteredItems.filter((item) => {
+      let freshFilteredItems = speciesFilteredItems.filter((item) => {
         if (fresh === "---") return true;
         if (item.fresh.toLowerCase() === fresh) return true;
         else return false;
@@ -148,19 +152,19 @@ const ProductFilter = ({ items, setFilteredItems }) => {
     };
 
     setFilteredItems(filterItems());
-  }, [items, frozen, fresh, grade, setFilteredItems]);
+  }, [items, frozen, fresh, species, setFilteredItems]);
 
   const handleFrozenChange = (e, { value }) => {
     if (value === "frozen") {
       setFrozen(value);
-      setGrade("---");
+      setSpecies("---");
       setFresh("---");
     } else {
       setFrozen(value);
     }
   };
 
-  const handleGradeChange = (e, { value }) => setGrade(value);
+  const handleSpeciesChange = (e, { value }) => setSpecies(value);
 
   const handleFreshChange = (e, { value }) => setFresh(value);
 
@@ -171,7 +175,7 @@ const ProductFilter = ({ items, setFilteredItems }) => {
         active
         onClick={() => {
           setFrozen("---");
-          setGrade("---");
+          setSpecies("---");
           setFresh("---");
         }}
       >
@@ -183,20 +187,22 @@ const ProductFilter = ({ items, setFilteredItems }) => {
           direction="right"
           className="button icon"
           floating
+          header={"Frozen?"}
           options={frozenOptions}
           onChange={handleFrozenChange}
           trigger={<></>}
         />
       </Button.Group>
       <Button.Group color="orange">
-        <Button disabled={gradeOptions().length === 1}>{grade}</Button>
+        <Button disabled={speciesOptions().length === 1}>{species}</Button>
         <Dropdown
           direction="right"
-          disabled={gradeOptions().length === 1}
+          disabled={speciesOptions().length === 1}
           className="button icon"
-          // floating
-          options={gradeOptions()}
-          onChange={handleGradeChange}
+          header={"Species"}
+          floating
+          options={speciesOptions()}
+          onChange={handleSpeciesChange}
           trigger={<></>}
         />
       </Button.Group>
@@ -206,6 +212,7 @@ const ProductFilter = ({ items, setFilteredItems }) => {
           direction="right"
           disabled={freshOptions().length === 1}
           className="button icon"
+          header={"State"}
           floating
           options={freshOptions()}
           onChange={handleFreshChange}

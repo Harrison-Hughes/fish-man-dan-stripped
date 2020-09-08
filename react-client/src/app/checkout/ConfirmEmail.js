@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 const ConfirmEmail = ({ registeredEmail }) => {
   const BackToBrowseButton = withRouter(({ history }) => (
     <Button
+      positive
       onClick={() => {
         history.push("/");
       }}
@@ -20,7 +21,7 @@ const ConfirmEmail = ({ registeredEmail }) => {
           Order confirmation e-mail sent to: {registeredEmail}
         </Header>
       </Segment>
-      <Segment positive vertical>
+      <Segment vertical>
         <BackToBrowseButton />
       </Segment>
     </div>

@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_08_25_150406) do
     t.boolean "is_frozen"
     t.boolean "price_by_each"
     t.string "price_per"
+    t.string "species"
     t.string "min"
     t.string "max"
     t.string "grade"
