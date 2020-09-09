@@ -181,7 +181,7 @@ const ProductFilter = ({ items, setFilteredItems }) => {
       >
         Filters:
       </Button>
-      <Button.Group color="teal">
+      <Button.Group basic color="grey">
         <Button>{frozen}</Button>
         <Dropdown
           direction="right"
@@ -193,9 +193,10 @@ const ProductFilter = ({ items, setFilteredItems }) => {
           trigger={<></>}
         />
       </Button.Group>
-      <Button.Group color="orange">
+      <Button.Group basic color="grey">
         <Button disabled={speciesOptions().length === 1}>{species}</Button>
         <Dropdown
+          scrolling
           direction="right"
           disabled={speciesOptions().length === 1}
           className="button icon"
@@ -206,7 +207,7 @@ const ProductFilter = ({ items, setFilteredItems }) => {
           trigger={<></>}
         />
       </Button.Group>
-      <Button.Group color="green">
+      <Button.Group basic color="grey">
         <Button disabled={freshOptions().length === 1}>{fresh}</Button>
         <Dropdown
           direction="right"
