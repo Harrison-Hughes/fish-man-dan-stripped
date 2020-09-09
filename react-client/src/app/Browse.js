@@ -42,6 +42,10 @@ const Browse = ({ basket, setBasket }) => {
   }, []);
 
   useEffect(() => {
+    setPage(1);
+  }, [listLayout, filteredItems]);
+
+  useEffect(() => {
     setTotalPage(Math.ceil(filteredItems.length / itemsPerPage));
   }, [filteredItems, itemsPerPage]);
 
@@ -126,7 +130,7 @@ const Browse = ({ basket, setBasket }) => {
                   icon
                   active={!listLayout}
                   onClick={() => {
-                    setPage(1);
+                    // setPage(1);
                     setItemsPerPage(12);
                     setListLayout(false);
                   }}
@@ -137,7 +141,7 @@ const Browse = ({ basket, setBasket }) => {
                   icon
                   active={listLayout}
                   onClick={() => {
-                    setPage(1);
+                    // setPage(1);
                     setItemsPerPage(5);
                     setListLayout(true);
                   }}
@@ -172,7 +176,7 @@ const Browse = ({ basket, setBasket }) => {
           onPageChange={pageChange}
           secondary
           pointing
-          defaultActivePage={1}
+          // defaultActivePage={1}
           // ellipsisItem={null}
           firstItem={null}
           lastItem={null}
