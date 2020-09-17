@@ -6,7 +6,7 @@ It was created in tandem with a client's requests for an easy to use online orde
 This version, although fully operational, WILL NOT ACTUALLY PLACE ANY ORDERS WITH THE MERCHANT (although this should be apparent as neither the front nor backend have been launched) - i.e. it is safe to 'place' orders if one so wishes without consequence, other than receiving a confirmation e-mail for each order (necessary to access the digital order receipt).
 
 #### To use
-This works like any other react on rails application, as hopefully should be very simple to run if these steps are followed:
+This works like any other react on rails application, and as such should (hopefully) be very simple to run:
  - Fork and clone into this repository
  - First, move into the 'rails-server' directory, and run 'bundle install' in the CLI to establish the gemfile.lock file
  - Then, run 'rails db:create db:migrate db:seed' to establish the database
