@@ -1,6 +1,6 @@
 ## fish-man-dan order portal // stripped back version
 This is a full stack (react on rails) and simplified combination of previous repos 'fish-man-dan-frontend' and 'fish-man-dan-backend'.
-It was created in tandem with a client's requests for an easy to use online order portal. It features an intuitive, step-by-step system, to browse produce and place orders, combined with e-mail validation for security reasons and a page for viewing digital order receipts.
+It was created in tandem with a client's requests for an easy to use online order portal (the client in question being a seafood merchant operating in the south of England). It features an intuitive, step-by-step system, to browse produce and place orders, combined with e-mail validation for security reasons and a page for viewing digital order receipts.
 
 #### Important note
 This version, optimised for demonstrative purposes, although fully operational will NOT actually place any orders with the merchant - i.e. it is safe to 'place' orders if one so wishes without consequence, other than receiving a confirmation e-mail for each order (necessary to access the digital order receipt).
