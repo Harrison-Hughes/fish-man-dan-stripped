@@ -9,7 +9,7 @@ This version, although fully operational, WILL NOT ACTUALLY PLACE ANY ORDERS WIT
 The structure of the application was developed in tandem with the client, with an emphasis on accessibility and ease of ordering. As of such, it has been designed in three main parts:
  - Browse: where a potential customer can simply see the available stock, and add to a basket (saved via. localStorage) if they wish
  - Checkout: where a customer can enter their order details, including an address for delivery and an e-mail address with which to confirm their order
- - Receipt: accessible by following a link in their confirmation e-mail (which registers the order as valid to the database), where a customer is able to review their order, track it's status, and cancel it if they wish 
+ - Receipt: accessible by following a link in their confirmation e-mail (which registers the order as valid to the database), this is where a customer is able to review their order, track it's status, and cancel it if they wish. 
 
 #### To use
 This works like any other react on rails application, and as such should (hopefully) be very simple to run:
