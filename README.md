@@ -3,7 +3,7 @@ This is a full stack (react on rails), simplified combination, of previous repos
 It was created in tandem with a client's requests for an easy to use online order portal. It features an intuitive, step-by-step system, to browse produce and place orders, combined with e-mail validation for security reasons and a page for viewing digital order receipts.
 
 #### Important note
-This version, although fully operational, WILL NOT ACTUALLY PLACE ANY ORDERS WITH THE MERCHANT (although this should be apparent as neither the front nor backend have been launched) - i.e. it is safe to 'place' orders if one so wishes without consequence, other than receiving a confirmation e-mail for each order (necessary to access the digital order receipt).
+This version, although fully operational, WILL NOT ACTUALLY PLACE ANY ORDERS WITH THE MERCHANT - i.e. it is safe to 'place' orders if one so wishes without consequence, other than receiving a confirmation e-mail for each order (necessary to access the digital order receipt).
 
 #### To use
 This works like any other react on rails application, and as such should (hopefully) be very simple to run:
