@@ -1,5 +1,4 @@
-## fish-man-dan (AKA Coralbay seafoods) order portal 
-### (stripped back version)
+## fish-man-dan order portal // (AKA Coralbay seafoods) // stripped back version
 This is a full stack (react on rails), simplified combination, of previous repos 'fish-man-dan-frontend' and 'fish-man-dan-backend'.
 It was created in tandem with a client's requests for an easy to use online order portal. It features an intuitive, step-by-step system, to browse produce and place orders, combined with e-mail validation for security reasons and a page for viewing digital order receipts.
 
