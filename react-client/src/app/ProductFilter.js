@@ -63,7 +63,7 @@ const ProductFilter = ({ items, setFilteredItems }) => {
     {
       key: "---",
       text: "--- (" + hypotheticalFilteredItemsLength("frozen", "---") + ")",
-      value: "---",
+      value: "",
     },
     {
       key: "not frozen",

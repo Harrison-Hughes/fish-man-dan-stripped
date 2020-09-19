@@ -15,8 +15,9 @@ const AppHeader = () => {
             // marginTop: "0.5em",
           }}
         >
-          fish man dan
+          fish man dan order portal
         </Header>
+        <Header.Subheader>(demo version)</Header.Subheader>
       </Segment>
     </div>
   );
