@@ -39,7 +39,7 @@ const Browse = ({ basket, setBasket }) => {
       .catch(() => {
         console.log("Server is currently offline. Please try later");
       });
-  }, []);
+  }, [itemsPerPage]);
 
   useEffect(() => {
     setPage(1);
@@ -89,7 +89,7 @@ const Browse = ({ basket, setBasket }) => {
       {welcomePanel ? (
         <Segment vertical>
           <Container>
-            <Header as="h2">Welcome to the fish-man-dan order portal!</Header>
+            <Header as="h2">Welcome to the fish man dan order portal!</Header>
             <Header as="h4">
               This portal has been designed to create a streamlined and
               easy-to-use seafood ordering service! On this page, you can see
@@ -130,7 +130,6 @@ const Browse = ({ basket, setBasket }) => {
                   icon
                   active={!listLayout}
                   onClick={() => {
-                    // setPage(1);
                     setItemsPerPage(12);
                     setListLayout(false);
                   }}
@@ -141,7 +140,6 @@ const Browse = ({ basket, setBasket }) => {
                   icon
                   active={listLayout}
                   onClick={() => {
-                    // setPage(1);
                     setItemsPerPage(5);
                     setListLayout(true);
                   }}

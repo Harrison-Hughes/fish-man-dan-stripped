@@ -33,6 +33,12 @@ const PlaceholderItemCardGrid = () => {
           <Header as="h2">
             We're just waking up the server, this might take a few seconds!
           </Header>
+          <Header as="h3">
+            If you are running the server locally and nothing has loaded, please
+            check that the server's location matches the clientside API root,
+            found at <br />
+            'react-client/src/Constants.js' under 'BASE_URL'
+          </Header>
         </Segment>
       </div>
       <Segment vertical>
