@@ -12,7 +12,7 @@ const AppFooter = () => {
             <a href="https://github.com/Harrison-Hughes/fish-man-dan-stripped">
               here
             </a>
-            , or compliment/hire me via e-mail{" "}
+            , or compliment me via e-mail{" "}
             <a href="mailto:harr.hughes@gmail.com">here</a>.
           </Header>
         </Container>
